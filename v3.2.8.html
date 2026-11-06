@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#ff9900">
+<title>Chicão · Pedidos e clientes · v3.2.8</title>
+<link rel="icon" href="assets/favicon.ico" sizes="any">
+<style>
+:root{--sidebar-expanded-width:230px;--hover-close-gap:14px;--orange:#ff9900;--blue:#62abd9;--ink:#27333d;--muted:#6d7880;--line:#e9edf0;--soft:#fff7eb;--danger:#b93939}*{box-sizing:border-box}body{margin:0;background:#fff;color:var(--ink);font:15px/1.5 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}button,input{font:inherit}button{cursor:pointer}button:disabled{cursor:not-allowed;opacity:.5}button,input{outline-offset:4px}button:focus-visible,input:focus-visible{outline:3px solid var(--blue)}button{border:1px solid var(--line);border-radius:11px;background:white;color:var(--ink);padding:10px 17px;font-weight:600;transition:background .15s}button:hover{background:#f5f7f9}.primary{background:var(--orange);border-color:var(--orange);color:#392500}.primary:hover{background:#ef9000}.danger{color:var(--danger);border-color:#eed3d3}.icon{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}.sidebar{position:fixed;inset:0 auto 0 0;width:64px;border-right:1px solid var(--line);background:#62abd9;z-index:20;display:flex;flex-direction:column;padding:20px 12px 20px 8px;overflow:hidden;transition:width .22s,box-shadow .22s}.sidebar.hovered,.sidebar:focus-within,.sidebar.open{width:var(--sidebar-expanded-width);box-shadow:12px 0 35px #27333d0b}.brand{display:flex;align-items:center;gap:14px;height:72px;white-space:nowrap;margin-bottom:28px}.brand img,.brand-fallback{width:50px;height:50px;flex-shrink:0;object-fit:contain;border-radius:14px;background:#286f97;padding:5px}.brand-fallback{display:grid;place-items:center;background:#286f97;color:#fff}.brand-fallback .icon{width:30px;height:30px}.brand strong{font-size:20px}.brand small{display:block;font-size:11px;letter-spacing:1.3px;color:var(--muted);font-weight:500}.nav{display:grid;gap:9px}.nav button,.barra-toggle{border:0;display:flex;align-items:center;gap:18px;width:210px;padding:14px;white-space:nowrap;background:transparent}.nav button.active{background:#286f97;color:#fff}.nav button.active:before{content:"";position:absolute;left:0;width:3px;height:26px;border-radius:0 3px 3px 0;background:var(--orange)}.nav button span,.brand-text,.sidebar-foot{opacity:0;transition:opacity .15s}.sidebar.hovered span,.sidebar:focus-within span,.sidebar.open span,.sidebar.hovered .brand-text,.sidebar:focus-within .brand-text,.sidebar.open .brand-text,.sidebar.hovered .sidebar-foot,.sidebar:focus-within .sidebar-foot,.sidebar.open .sidebar-foot{opacity:1}.sidebar-foot{margin-top:auto;white-space:nowrap;padding:14px;font-size:12px;color:#27333d}.barra-toggle{margin-top:18px;color:#27333d}main{margin-left:64px;max-width:1550px;padding:42px 50px 28px;transition:margin-left .22s}
+.sidebar.open~main{margin-left:var(--sidebar-expanded-width)}.eyebrow{font-size:11px;font-weight:700;letter-spacing:2px;color:#b76d00;margin-bottom:8px}.top{display:flex;align-items:center;justify-content:space-between;gap:22px;margin-bottom:32px}h1{font-size:34px;letter-spacing:-1px;line-height:1.2;margin:0 0 10px}p{margin:0;color:var(--muted)}.primary .icon{width:18px;height:18px}.new{display:flex;align-items:center;gap:9px;padding:13px 20px}.local{display:flex;align-items:center;gap:7px;font-size:12px;color:var(--muted);margin-top:14px}.dot{width:7px;height:7px;border-radius:50%;background:var(--blue)}.search-panel{background:#f8fbfd;border:1px solid #e4eff6;padding:22px;border-radius:16px;margin-bottom:26px}.search-box{position:relative}.search-box>.icon{position:absolute;left:17px;top:16px;color:#73a7c8;width:21px}.search-box input{width:100%;padding:15px 48px;border:1px solid #dce7ed;border-radius:11px;background:white;color:var(--ink)}.clear-search{position:absolute;right:8px;top:8px;padding:5px 10px;border:0;font-size:20px}.search-help{font-size:12px;margin-top:10px;color:var(--muted)}.section-bar{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;gap:12px}.section-bar h2{font-size:17px;margin:0}.count{background:var(--soft);color:#a26300;padding:3px 9px;border-radius:20px;font-size:12px;margin-left:8px}.sort-label{font-size:12px;color:var(--muted)}.table-wrap{border:1px solid var(--line);border-radius:14px;overflow:auto;min-height:310px}table{width:100%;border-collapse:collapse;text-align:left;table-layout:fixed;min-width:760px}th{background:#fafbfc;color:#6d7880;font-size:12px;letter-spacing:.3px;font-weight:600;padding:17px 20px;border-bottom:1px solid var(--line)}th:nth-child(1){width:24%}th:nth-child(2){width:20%}th:nth-child(3){width:29%}th:nth-child(4){width:27%}.sort-button{border:0;padding:0 7px;color:#778590;background:transparent;font-size:15px}td{padding:19px 20px;border-bottom:1px solid #f0f2f4;overflow-wrap:anywhere;font-size:14px}tr:last-child td{border-bottom:0}tbody tr:hover{background:#fffcf6}.client-name{display:flex;align-items:center;gap:12px}.avatar{display:grid;place-items:center;flex-shrink:0;width:37px;height:37px;background:#eef6fb;color:#447e9f;border-radius:12px;font-size:12px;font-weight:700}.edit{border:0;background:transparent;padding:0;text-align:left;overflow-wrap:anywhere;font-weight:650}.edit:hover{text-decoration:underline;background:none}.empty{text-align:center;padding:66px 20px}.empty .icon{width:44px;height:44px;color:var(--blue);margin-bottom:14px}.empty h3{font-size:17px;margin:0 0 6px}.empty p{font-size:13px}.footer{display:flex;justify-content:space-between;gap:16px;margin-top:17px;color:#7a858e;font-size:12px}.popup{position:fixed;z-index:50;background:white;border:1px solid var(--line);padding:6px;border-radius:12px;box-shadow:0 12px 40px #27333d24;width:190px}.popup button{display:block;width:100%;text-align:left;border:0;font-size:13px;padding:10px}.data-panel{border:1px solid var(--line);border-radius:16px;padding:28px}.data-buttons{display:flex;gap:12px;flex-wrap:wrap}.data-note{border-top:1px solid var(--line);margin-top:26px;padding-top:22px;font-size:13px;max-width:780px}.data-note strong{display:block;color:var(--ink);margin-bottom:5px}dialog{border:1px solid var(--line);border-radius:19px;box-shadow:0 25px 90px #18324733;width:min(540px,calc(100% - 28px));padding:28px;color:var(--ink)}dialog::backdrop{background:#24374666;backdrop-filter:blur(3px)}dialog h2{font-size:23px;margin:0 0 5px}dialog p{font-size:13px;margin-bottom:22px}.dialog-head{display:flex;justify-content:space-between;gap:15px}.close{padding:0 9px;height:33px;font-size:22px;border:0}.fields{display:grid;gap:16px}.fields label{font-size:13px;font-weight:600;display:grid;gap:7px}.fields input{width:100%;border:1px solid #dce3e8;border-radius:9px;padding:11px 12px;font-weight:400}.dialog-actions{display:flex;justify-content:flex-end;gap:10px;margin-top:26px;flex-wrap:wrap}.dialog-actions .delete-one{margin-right:auto}.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:#27333d;color:#fff;border-radius:12px;padding:13px 22px;z-index:100;width:max-content;max-width:90vw;font-size:14px;box-shadow:0 6px 24px #27333d22}.warning{background:#fff3e5;color:#8a4a00;border:1px solid #ffd59c;border-radius:10px;padding:14px;margin-bottom:20px;font-size:13px}[hidden]{display:none!important}@media(max-width:700px){:root{--sidebar-expanded-width:224px}main{padding:27px 18px;margin-left:54px}.sidebar{width:54px;padding:15px 7px 15px 3px}.sidebar.open~main{margin-left:var(--sidebar-expanded-width)}.sidebar.hovered,.sidebar:focus-within,.sidebar.open{width:var(--sidebar-expanded-width)}.brand img,.brand-fallback{width:46px;height:46px}.top{align-items:flex-start;flex-direction:column;margin-bottom:24px}h1{font-size:29px}.new{width:100%;justify-content:center}.search-panel{padding:15px}.sort-label{max-width:130px;text-align:right}.footer{flex-direction:column;gap:4px}.data-panel{padding:20px}.data-buttons{flex-direction:column}.dialog-actions button{padding:10px 12px}}@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+#pedidos{--wine:#b66b00;}#pedidos *{box-sizing:border-box}#pedidos .topbar{height:94px;background:#fff;border-bottom:1px solid #e5e3e5;padding:0 max(5vw,24px);display:flex;align-items:center;justify-content:space-between}#pedidos .brand{display:flex;align-items:center;gap:13px;color:#30292a;text-decoration:none;font-size:16px;font-weight:800;letter-spacing:1.4px}#pedidos .brand-icon{background:var(--wine);color:white;font-size:32px;width:46px;height:46px;border-radius:12px;display:grid;place-content:center;position:relative}#pedidos .brand-icon span{color:#e7c698;position:absolute;font-size:22px;right:5px;bottom:2px}#pedidos .brand small{display:block;font-size:10px;letter-spacing:2px;font-weight:500;margin-top:6px;color:#746b6f}#pedidos .top-label{font-size:14px;color:#766f73}#pedidos .page-heading{display:flex;justify-content:space-between;align-items:center;margin-bottom:30px}#pedidos .eyebrow{font-size:12px;letter-spacing:1.8px;color:var(--wine);font-weight:700}#pedidos h1{font-size:32px;letter-spacing:-1px;margin:10px 0}#pedidos p{line-height:1.5}#pedidos .page-heading p{color:#726c73;margin:0;font-size:16px}#pedidos .date{font-size:14px;color:#726c73}#pedidos .workspace{display:grid;grid-template-columns:minmax(0,1fr) 350px;gap:34px;align-items:start}#pedidos .card{border:1px solid #e5e2e5;background:#fff;border-radius:14px;padding:26px;margin-bottom:22px}#pedidos .section-heading{display:flex;align-items:center;gap:12px;margin-bottom:24px}#pedidos .step{font-size:12px;font-weight:700;color:var(--wine);background:#f8edf0;padding:8px;border-radius:8px}#pedidos h2{font-size:18px;margin:0}#pedidos .count{margin-left:auto;color:#797079;font-size:13px}#pedidos .fields{display:grid;grid-template-columns:1fr 1fr;gap:20px}#pedidos .full{grid-column:1/-1}#pedidos label{font-size:14px;font-weight:600;display:block}#pedidos label span{color:var(--wine)}#pedidos input,#pedidos textarea{width:100%;border:1px solid #dcd8dd;border-radius:7px;padding:13px 14px;font:400 16px Arial;color:#30282d;background:#fff;margin-top:8px;min-width:0}#pedidos textarea{resize:vertical}#pedidos input::placeholder,#pedidos textarea::placeholder{color:#9a9299}#pedidos input:focus,#pedidos textarea:focus{outline:2px solid #9d323e44;border-color:var(--wine)}#pedidos button{font:600 14px Arial;cursor:pointer;border-radius:8px;min-height:44px}#pedidos button:focus-visible{outline:3px solid #bc8d49;outline-offset:3px}#pedidos .column-head,#pedidos .item-row{display:grid;grid-template-columns:minmax(90px,1fr) 66px 106px 96px 30px;gap:8px;align-items:center}#pedidos .column-head{color:#777078;font-size:12px;margin-bottom:8px}#pedidos .item-row{margin-bottom:14px}#pedidos .item-row input{margin:0;padding:12px 9px}#pedidos .item-row label{min-width:0}#pedidos .mobile-label{display:none}#pedidos .subtotal{text-align:right;font-size:14px;font-weight:600;overflow-wrap:anywhere}#pedidos .remove{border:0;color:#8e7a80;background:transparent;font-size:22px;padding:0;min-width:30px}#pedidos .remove:hover{background:#fae8eb;color:#a1263a}#pedidos .add-button{margin-top:5px;background:#fff;border:1px dashed #c9b7bd;color:var(--wine);width:100%}#pedidos .add-button:hover{background:#faf0f2}#pedidos .add-button span{font-size:20px;margin-right:5px}#pedidos .order-total{border-top:1px solid #e8e4e7;margin-top:26px;padding-top:22px;display:flex;align-items:center;justify-content:space-between;font-size:15px}#pedidos .order-total strong{font-size:27px;color:var(--wine)}#pedidos .local-note{font-size:13px;color:#7a7279;padding:0 4px;max-width:580px}#pedidos .preview-top{display:flex;align-items:center;justify-content:space-between;margin:5px 0 18px}#pedidos .preview-top h2{font-size:16px}#pedidos .preview-top span{border:1px solid #d9d3d8;padding:5px 9px;border-radius:5px;font-size:12px;color:#726973}#pedidos .paper-wrap{background:#e9e7e9;padding:20px;border-radius:12px}#pedidos .receipt{background:white;color:#000;padding:22px 17px;font-family:Arial,Helvetica,sans-serif;font-size:15px;font-weight:700;line-height:1.4;box-shadow:0 3px 6px #00000008;overflow-wrap:anywhere}#pedidos .receipt p{margin:6px 0}#pedidos .receipt-header{text-align:center;border-bottom:2px dashed #aaa;padding-bottom:16px}#pedidos .receipt-header h2{font-size:21px}#pedidos .receipt-header p{font-size:14px}#pedidos .receipt-client{padding:12px 0;border-bottom:2px dashed #aaa;white-space:pre-wrap}#pedidos .receipt-item{padding:10px 0;break-inside:avoid;border-bottom:1px dotted #aaa}#pedidos .receipt-item div{display:flex;justify-content:space-between;gap:10px;margin-top:4px}#pedidos .receipt-empty{padding:18px 0;color:#757575;text-align:center;font-size:14px}#pedidos .receipt-total{padding:17px 0;border-bottom:2px dashed #aaa}#pedidos .receipt-total span{font-size:14px;display:block}#pedidos .receipt-total strong{font-size:27px;display:block;margin-top:3px}#pedidos .receipt-footer{text-align:center;font-size:12px;padding-top:12px}#pedidos .print-button{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;padding:16px;background:var(--wine);border:0;color:#fff;margin-top:20px;font-size:16px;box-shadow:0 4px 8px #9d323e18}#pedidos .print-button:hover{background:#842a34}#pedidos .print-tip{font-size:13px;color:#766d76;text-align:center;margin:14px 6px}#pedidos #ord-message{color:var(--wine);font-size:14px}@media(max-width:1120px){#pedidos .workspace{grid-template-columns:minmax(0,1fr) 315px;gap:20px}#pedidos .card{padding:20px}#pedidos .column-head{display:none}#pedidos .item-row{grid-template-columns:70px 1fr 90px 30px;gap:10px}#pedidos .item-row label:first-child{grid-column:1/-1}#pedidos .mobile-label{display:block;font-size:12px;margin-bottom:6px;color:#766d76}#pedidos .subtotal{padding-top:18px}}@media(max-width:760px){#pedidos .topbar{height:78px;padding:0 20px}#pedidos .top-label{display:none}#pedidos .page-heading{align-items:flex-start}#pedidos .date{display:none}#pedidos h1{font-size:28px}#pedidos .workspace{grid-template-columns:1fr;gap:10px}#pedidos aside{max-width:390px;width:100%;margin:0 auto}#pedidos .card{padding:20px 16px}#pedidos .order-total strong{font-size:24px}}#pedidos .receipt-client-name{text-align:center;border-bottom:2px dashed #aaa;padding-bottom:14px;margin-bottom:14px}#pedidos .receipt-client-name span{display:block;font-size:11px;letter-spacing:1.5px}#pedidos .receipt-client-name strong{display:block;font-size:19px;margin-top:4px}#pedidos .signature{padding-top:36px;margin-top:20px;text-align:center;border-bottom:1px solid #000}#pedidos .signature span{display:inline-block;transform:translateY(22px);background:#fff;padding:0 8px;font-size:11px}#pedidos .receipt-date{text-align:center;font-size:11px;margin-top:34px!important}#pedidos .clear-button{width:100%;margin-top:10px;background:#fff;border:1px solid #cbbfc3;color:var(--wine)}#pedidos .clear-button:hover{background:#faf0f2}
+#pedidos .order-heading{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-bottom:28px}#pedidos .order-heading h1{margin:0 0 10px}#pedidos .print-button{background:#ff9900;color:#392500;box-shadow:none}#pedidos .print-button:hover{background:#ef9000}#pedidos .step{background:#eef6fb;color:#286f97}#pedidos .order-total strong{color:#286f97}#pedidos .card{border-color:#e9edf0}#pedidos .add-button{color:#286f97;border-color:#62abd9}#pedidos .add-button:hover{background:#eef6fb}#pedidos .paper-wrap{background:#eef6fb}#pedidos .customer-options{margin-top:6px;border:1px solid #dce7ed;border-radius:9px;max-height:240px;overflow:auto}#pedidos .customer-options button{display:block;text-align:left;width:100%;border:0;border-radius:0;padding:10px 12px;background:#fff;min-height:44px}#pedidos .customer-options button:hover,#pedidos .customer-options button:focus{background:#eef6fb}#pedidos .customer-options small{display:block;font-weight:400;color:#526774}#pedidos .customer-details{white-space:pre-wrap;margin-top:12px;font-size:13px;color:#526774}#pedidos .customer-help{font-size:12px;color:#6d7880;margin:8px 0 0}
+@page{margin:0;size:auto}
+@media print{html,body{background:#fff!important;width:80mm!important;margin:0!important;padding:0!important}body>svg,.sidebar,dialog,.popup,.toast,#storageWarning,main>section:not(#pedidos){display:none!important}main,#pedidos,#pedidos .workspace,#pedidos aside,#pedidos .paper-wrap{display:block!important;width:80mm!important;max-width:80mm!important;margin:0!important;padding:0!important;border:0!important;background:#fff!important}#pedidos .order-heading,#pedidos form,#pedidos .preview-top,#pedidos .print-button,#pedidos .clear-button,#pedidos .print-tip,#ord-message{display:none!important}#pedidos .receipt{width:72mm!important;margin:0 auto!important;padding:3mm 0 5mm!important;box-shadow:none!important;font-size:12pt!important;font-weight:700!important;color:#000!important}#pedidos .receipt-client-name strong{font-size:15pt!important}#pedidos .receipt-header h2{font-size:16pt!important}#pedidos .receipt-header p,#pedidos .receipt-total span{font-size:12pt!important}#pedidos .receipt-total strong{font-size:19pt!important}#pedidos .receipt-footer{font-size:10pt!important}#pedidos .receipt-header,#pedidos .receipt-client-name,#pedidos .receipt-total{border-color:#000!important}#pedidos .receipt-item{border-color:#000!important;break-inside:avoid}#pedidos .receipt-total,#pedidos .receipt-footer,#pedidos .signature,#pedidos .receipt-date{break-inside:avoid}}
+
+#pedidos .receipt p{color:inherit}
+#clientDialog{width:min(640px,calc(100% - 28px))}.phone-row{display:flex;align-items:flex-start;gap:12px}.phone-row>label:first-child{flex:1;min-width:0}.fields .wa-choice{display:flex;align-items:center;gap:9px;margin-top:27px;padding:8px;border:1px solid #dce3e8;border-radius:9px;cursor:pointer}.fields .wa-choice input{width:20px;height:20px;padding:0;accent-color:#168342}.wa-icon{width:24px;height:24px;color:#168342;flex-shrink:0;vertical-align:middle}.phone-display{display:flex;align-items:center;gap:8px}.address-fields{border:1px solid #dce3e8;border-radius:12px;padding:16px;margin:0;min-width:0}.address-fields legend{font-size:14px;font-weight:600;padding:0 6px}.address-grid{display:grid;grid-template-columns:2fr 1fr;gap:14px}.field-error{color:#b93939;font-size:12px;font-weight:400}@media(max-width:480px){.address-grid{grid-template-columns:1fr}}
+.agenda-phone{white-space:nowrap;font-variant-numeric:tabular-nums}
+
+#pedidos .payment-options{display:grid;grid-template-columns:1fr 1fr;gap:12px}#pedidos .payment-options label,#pedidos .paid-choice{display:flex;align-items:center;gap:9px;font-size:14px;cursor:pointer}#pedidos .payment-options input,#pedidos .paid-choice input{width:18px;height:18px;margin:0;padding:0;accent-color:#286f97}#pedidos .payment-extras{display:flex;align-items:center;gap:28px;margin-top:22px;border-top:1px solid #e9edf0;padding-top:18px}#pedidos .delivery-fee>label:first-child{grid-column:span 2}#pedidos .delivery-quantity{display:none!important}#pedidos .receipt-delivery-fee{display:flex;justify-content:space-between;gap:12px;font-weight:700}#pedidos .delivery-fee .price[readonly]{user-select:none;-webkit-user-select:none;caret-color:transparent}#pedidos .delivery-fee .price:not([readonly]){cursor:text}#pedidos .delivery-fee input{background:#f0f7fb;color:#286f97;cursor:default}#pedidos .paid-choice:has(input:disabled){opacity:.5;cursor:not-allowed}#pedidos .receipt-phone{font-size:14px;margin-top:6px}#pedidos .receipt-address{font-size:13px;margin-top:5px;line-height:1.4;white-space:normal;overflow-wrap:anywhere}#pedidos .receipt-client-name strong{font-size:23px}#pedidos .receipt-payment{font-size:12px;margin-top:14px;break-inside:avoid}#pedidos .payment-paper-grid{display:grid;grid-template-columns:1fr 1fr;gap:7px 10px}#pedidos .payment-paper-choice{display:flex;justify-content:space-between;align-items:center;gap:3px}#pedidos .paper-checkbox{display:inline-block;border:1px solid #000;width:11px;height:11px;flex-shrink:0}#pedidos .amount-stamp{position:relative;isolation:isolate}#pedidos #ord-paid-mark{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;transform:rotate(-18deg);font-size:81.12px;font-weight:900;color:#555;opacity:.50;pointer-events:none;z-index:1}#pedidos .customer-options{grid-column:1/-1;margin:0}@media(max-width:600px){#pedidos .order-customer-grid{grid-template-columns:1fr}#pedidos .payment-options{grid-template-columns:1fr}}@media print{#pedidos .receipt-client-name strong{font-size:17pt!important}#pedidos .receipt-phone{font-size:11pt}#pedidos .receipt-address{font-size:10pt}#pedidos .receipt-payment{font-size:9pt}#pedidos #ord-paid-mark{print-color-adjust:exact;-webkit-print-color-adjust:exact}}
+#pedidos .receipt-total,#pedidos .receipt-payment{text-align:center}
+
+/* Autenticação e área de equipe da v3.2.7 */
+body.cloud-locked > .sidebar,body.cloud-locked > main{visibility:hidden}
+.cloud-auth{position:fixed;inset:0;z-index:200;background:#f1f7fb;display:grid;place-items:center;padding:16px}
+.cloud-auth-card{width:min(430px,100%);background:#fff;border:1px solid #dce7ed;border-radius:18px;padding:30px;box-shadow:0 12px 48px #1234a118}
+.cloud-auth-card h1{font-size:27px;margin-bottom:8px}.cloud-auth-card label{display:grid;gap:5px;font-size:13px;font-weight:650;margin:13px 0}
+.cloud-auth-card input{border:1px solid #dce7ed;border-radius:9px;padding:12px;width:100%}.cloud-auth-card .primary{width:100%}
+.cloud-auth-card .cloud-auth-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}.cloud-auth-actions button{font-size:12px;padding:7px 9px}
+#cloudLoginMessage{color:#a33b3b;font-size:13px;margin-top:14px;white-space:pre-wrap}
+.cloud-session{position:fixed;right:12px;top:10px;z-index:30;display:flex;align-items:center;gap:8px;background:#fff;border:1px solid #e1e9ee;border-radius:12px;padding:5px 9px;font-size:12px;max-width:calc(100vw - 90px)}
+.cloud-session span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:220px}.cloud-session button{padding:5px 9px;font-size:12px}
+.cloud-panel{border:1px solid #e1ebef;border-radius:14px;padding:20px}.cloud-panel h2{font-size:17px;margin:18px 0 9px}
+.cloud-panel .cloud-inputs{display:flex;gap:8px;flex-wrap:wrap}.cloud-panel input{padding:11px;border:1px solid #dce7ed;border-radius:9px;min-width:180px;flex:1}
+.cloud-panel .cloud-line{display:flex;align-items:center;justify-content:space-between;gap:12px;border-bottom:1px solid #edf1f4;padding:12px 0;flex-wrap:wrap}
+.cloud-line span{overflow-wrap:anywhere}.cloud-line button{padding:7px 12px}
+.cloud-notice{background:#eef6fb;border:1px solid #dce7ed;border-radius:10px;padding:13px;font-size:13px;margin-top:12px}
+@media print{.cloud-auth,.cloud-session{display:none!important}}
+
+/* Recuperação de senha — v3.2.8 */
+.cloud-auth-card #cloudRecoveryForm h2{font-size:20px;margin:18px 0 8px}
+.cloud-auth-card #cloudRecoveryForm .primary{margin-top:10px}
+.cloud-auth-card #cloudRecoveryForm p{font-size:13px;margin:8px 0 14px}
+</style>
+</head>
+<body class="cloud-locked">
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none"><symbol id="paw" viewBox="0 0 24 24"><path d="M7 15c1-5 9-5 10 0 5 6-1 7-5 4-4 3-10 2-5-4Z"/><ellipse cx="5" cy="9" rx="2" ry="3"/><ellipse cx="10" cy="5" rx="2" ry="3"/><ellipse cx="16" cy="5" rx="2" ry="3"/><ellipse cx="21" cy="10" rx="2" ry="3"/></symbol><symbol id="book" viewBox="0 0 24 24"><rect x="5" y="3" width="15" height="18" rx="3"/><path d="M3 7h4M3 12h4M3 17h4M11 8h5M11 12h5M11 16h3"/></symbol><symbol id="database" viewBox="0 0 24 24"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v14c0 4 16 4 16 0V5M4 12c0 4 16 4 16 0"/></symbol><symbol id="search-icon" viewBox="0 0 24 24"><circle cx="10" cy="10" r="6.5"/><path d="m15 15 6 6"/></symbol><symbol id="plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol><symbol id="barra" viewBox="0 0 24 24"><path d="M5 6h14M5 12h14M5 18h14"/></symbol></svg>
+<aside class="sidebar" id="sidebar" aria-label="barra principal">
+<div class="brand"><img id="logo" src="assets/logo.png" alt="Logo do petshop"><div class="brand-fallback" id="logoFallback" hidden><svg class="icon"><use href="#paw"/></svg></div><div class="brand-text"><strong>Chicão</strong><small>Casa de ração</small></div></div>
+<nav class="nav"><button class="active" data-page="pedidos" aria-current="page" title="Pedidos"><svg class="icon"><use href="#book"/></svg><span>Pedidos</span></button><button data-page="agenda" title="Agenda"><svg class="icon"><use href="#book"/></svg><span>Agenda</span></button><button data-page="dados" title="Dados"><svg class="icon"><use href="#database"/></svg><span>Dados</span></button><button data-page="funcionarios" id="cloudStaffNav" title="Funcionários" hidden><svg class="icon"><use href="#book"/></svg><span>Funcionários</span></button></nav>
+<button class="barra-toggle" id="barraToggle" aria-label="Expandir ou recolher barra" aria-expanded="false"><svg class="icon"><use href="#barra"/></svg><span>Fixar barra</span></button>
+</aside>
+<div id="cloudSession" class="cloud-session" hidden><span id="cloudUserLabel"></span><button type="button" id="cloudLogout">Sair</button></div>
+<main>
+<div id="storageWarning" class="warning" role="alert" hidden></div>
+<section id="pedidos"><header class="order-heading"><div><h1>Pedidos</h1><p>Prepare o pedido e imprima a comanda.</p></div><span class="date" id="ord-today"></span></header><div class="workspace"><form id="ord-order-form"><section class="card"><div class="section-heading"><span class="step">01</span><h2>Dados do cliente</h2></div><div class="fields order-customer-grid"><label>Nome do cliente <span>*</span><input id="ord-client" class="order-customer-input" autocomplete="off" placeholder="Nome completo" maxlength="500" aria-controls="orderCustomers" required></label><label>Telefone<input id="ord-phone" class="order-customer-input" autocomplete="off" placeholder="+55 (11) 940028922" maxlength="500" aria-controls="orderCustomers" type="tel"></label><label>Rua<input id="ord-street" class="order-customer-input" autocomplete="off" placeholder="Rua das Flores" maxlength="500" aria-controls="orderCustomers"></label><label>Número<input id="ord-number" class="order-customer-input" autocomplete="off" placeholder="123" maxlength="500" aria-controls="orderCustomers"></label><label class="full">Complemento<input id="ord-extra" class="order-customer-input" autocomplete="off" placeholder="Casa 2 ou Apto 45" maxlength="500" aria-controls="orderCustomers"></label><div id="orderCustomers" class="customer-options full" hidden></div><p class="customer-help full">Pesquise em qualquer campo e selecione um cliente da Agenda para preencher os demais.</p></div></section>
+<section class="card payment-card"><div class="section-heading"><span class="step">02</span><h2>Forma de pagamento</h2></div><div class="payment-options" role="group" aria-label="Forma de pagamento"><label><input type="checkbox" name="orderPayment" value="Dinheiro">Dinheiro</label><label><input type="checkbox" name="orderPayment" value="Cartão">Cartão</label><label><input type="checkbox" name="orderPayment" value="Pix">Pix</label><label><input type="checkbox" name="orderPayment" value="Pagamento a prazo">Pagamento a prazo</label></div><div class="payment-extras"><label class="paid-choice"><input type="checkbox" id="ord-paid">Pago</label><label class="paid-choice"><input type="checkbox" id="ord-delivery">Entrega</label></div></section>
+<section class="card products"><div class="section-heading"><span class="step">03</span><h2>Produtos do pedido</h2><span id="ord-item-count" class="count">1 item</span></div><div class="column-head"><span>Produto</span><span>Qtd.</span><span>Valor unit.</span><span>Subtotal</span><span></span></div><div id="ord-items"></div><button class="add-button" id="ord-add-item" type="button"><span>＋</span> Adicionar produto</button><div class="order-total"><span>Total do pedido</span><strong id="ord-total">R$&nbsp;0,00</strong></div></section><p id="orderDraftStatus" class="local-note" role="status"></p><p class="local-note">O pedido em andamento é salvo automaticamente neste navegador e restaurado ao reabrir a página. Limpar dados preenchidos também apaga o rascunho salvo.</p></form>
+<aside><div class="preview-top"><h2>Comprovante</h2><span>80 mm</span></div><div class="paper-wrap"><article id="ord-receipt" class="receipt"><div class="receipt-client-name"><span>CLIENTE</span><strong id="ord-r-client">—</strong><div id="ord-r-phone" class="receipt-phone" hidden></div><div id="ord-r-address" class="receipt-address" hidden></div></div><div class="receipt-header"><h2>CHICÃO RAÇÕES</h2><p>PEDIDO</p></div><div id="ord-r-items"><p class="receipt-empty">Os produtos aparecerão aqui.</p></div><div class="receipt-total"><span>TOTAL A PAGAR</span><div class="amount-stamp"><strong id="ord-r-total">R$&nbsp;0,00</strong><div id="ord-paid-mark" hidden>PAGO</div></div></div><div id="ord-r-payment" class="receipt-payment"></div><p class="receipt-footer">Comprovante de pedido • Não fiscal</p><div class="signature"><span>Assinatura do cliente</span></div><p class="receipt-date" id="ord-receipt-date">27/10/2026, 17:08</p></article></div><button class="print-button" type="submit" form="ord-order-form"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M6 9V3h12v6M6 18H3V9h18v9h-3M6 14h12v7H6z"></path></svg> Imprimir pedido</button><button class="clear-button" id="ord-clear-form" type="button">Limpar dados preenchidos</button><p class="print-tip">Na impressão, selecione papel de 80 mm, escala 100% e desative cabeçalhos e rodapés.</p><p id="ord-message" role="status"></p></aside></div></section>
+<section id="agenda" hidden>
+<div class="eyebrow">Chicão Rações</div>
+<header class="top"><div><h1>Agenda de clientes</h1><p>Todos os seus contatos, no mesmo lugar.</p><div class="local"><i class="dot"></i><span id="cloudSyncStatus">Conectando ao Supabase…</span></div></div><button class="primary new" id="newClient"><svg class="icon"><use href="#plus"/></svg>Novo cliente</button></header>	
+<div class="search-panel"><div class="search-box"><svg class="icon"><use href="#search-icon"/></svg><input id="search" type="search" aria-label="Pesquisar clientes" placeholder="Busque por nome, telefone, endereço ou email…" autocomplete="off"><button class="clear-search" id="clearSearch" aria-label="Limpar pesquisa" hidden>×</button></div><p class="search-help">Combine informações para encontrar mais rápido. Ex.: <strong>ed 9685</strong>. Acentos não fazem diferença.</p></div>
+<div class="section-bar"><h2>Seus clientes <span class="count" id="count">0</span></h2><span class="sort-label" id="sortLabel">Nome · A a Z</span></div>
+<div class="table-wrap"><table><thead><tr><th scope="col" aria-sort="ascending">Nome <button class="sort-button" data-field="nome" aria-label="Ordenar por nome" aria-expanded="false" aria-controls="sortbarra">▽</button></th><th scope="col">Telefone <button class="sort-button" data-field="telefone" aria-label="Ordenar por telefone" aria-expanded="false" aria-controls="sortbarra">▽</button></th><th scope="col">Endereço <button class="sort-button" data-field="endereco" aria-label="Ordenar por endereço" aria-expanded="false" aria-controls="sortbarra">▽</button></th><th scope="col">Email <button class="sort-button" data-field="email" aria-label="Ordenar por email" aria-expanded="false" aria-controls="sortbarra">▽</button></th></tr></thead><tbody id="rows"></tbody></table><div class="empty" id="empty"><svg class="icon"><use href="#paw"/></svg><h3 id="emptyTitle">Agenda vazia</h3><p id="emptyText">Clique em “Novo cliente” para fazer seu primeiro cadastro.</p></div></div>
+<footer class="footer"><span id="results" aria-live="polite">0 clientes cadastrados</span><span>Clique no nome de um cliente para editar.</span></footer>
+</section>
+<section id="dados" hidden><div class="eyebrow">TUDO SOB SEU CONTROLE</div><header class="top"><div><h1>Dados</h1><p>Guarde uma cópia dos seus contatos e restaure quando precisar.</p></div></header><div class="data-panel"><div class="data-buttons"><button id="cloudMigrate" type="button" hidden>Migrar clientes deste navegador</button><button class="primary" id="exportData">Exportar dados</button><button id="importData">Importar dados</button><button class="danger" id="deleteData">Excluir dados</button></div><div class="data-note"><strong>Agenda de clientes sincronizada pelo Supabase.</strong><p>Alterações de funcionários autorizados aparecem nos outros computadores conectados. Os rascunhos de Pedidos permanecem locais, neste navegador.</p><p style="margin-top:12px">Importar um JSON mescla os cadastros sem excluir clientes existentes. Faça backups antes de alterações em massa.</p></div></div></section>
+<section id="funcionarios" hidden>
+<div class="eyebrow">ADMINISTRAÇÃO</div><header class="top"><div><h1>Funcionários</h1><p>Autorize contas individuais para acessar os clientes e pedidos.</p></div></header>
+<div class="cloud-panel"><h2>Autorizar funcionário</h2><p>Cadastre o e-mail do funcionário. Depois ele pode criar a própria senha na tela de entrada e confirmar o e-mail.</p>
+<div class="cloud-inputs" style="margin-top:14px"><input id="cloudInviteName" placeholder="Nome do funcionário" maxlength="120" aria-label="Nome do funcionário"><input id="cloudInviteEmail" placeholder="E-mail de acesso" type="email" maxlength="254" aria-label="E-mail do funcionário"><button class="primary" id="cloudInviteSave" type="button">Autorizar e-mail</button></div>
+<div class="cloud-notice">O administrador pode bloquear um funcionário imediatamente. O cadastro de clientes continuará centralizado no banco de dados.</div>
+<h2>Equipe ativa e bloqueada</h2><div id="cloudStaffRows"></div><h2>Convites pendentes</h2><div id="cloudInviteRows"></div></div></section>
+</main>
+<div class="popup" id="sortbarra" hidden><button data-direction="asc">Filtrar de A a Z</button><button data-direction="desc">Filtrar de Z a A</button></div>
+<dialog id="clientDialog" aria-labelledby="dialogTitle"><form id="clientForm"><div class="dialog-head"><h2 id="dialogTitle">Novo cliente</h2><button type="button" class="close" id="closeDialog" aria-label="Fechar">×</button></div><p>Um bom atendimento começa por conhecer seu cliente.</p><div class="fields"><label>Nome *<input name="nome" required maxlength="180" autocomplete="name" placeholder="Nome completo"></label><div class="phone-row"><label>Telefone *<input name="telefone" type="tel" inputmode="numeric" required autocomplete="tel" placeholder="+55 (11) 940028922" aria-describedby="phoneError"><span id="phoneError" class="field-error" hidden>Informe um número de celular válido, com 9 a 14 dígitos.</span></label><label class="wa-choice" title="Contato possui WhatsApp"><input type="checkbox" name="whatsapp" aria-label="Contato possui WhatsApp"><svg class="wa-icon" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18a8 8 0 0 1-4.1-1.1l-.4-.2-2.6.7.7-2.5-.3-.4A8 8 0 1 1 12 20Z"/><path fill="currentColor" d="M8 7c-.5 0-1.5 1-1.5 2.2 0 2.8 4.5 7.2 7.6 7.2 1.4 0 2.5-1.1 2.5-1.9 0-.3-.1-.4-.4-.5l-2-1c-.3-.1-.5-.1-.7.2l-.8 1c-.2.2-.4.2-.7.1a7 7 0 0 1-3.5-3.1c-.2-.3-.1-.5.1-.7l.6-.8c.2-.2.2-.4.1-.7L8.5 7.3C8.4 7 8.2 7 8 7Z"/></svg></label></div><fieldset class="address-fields"><legend>Endereço</legend><div class="address-grid"><label>Rua<input name="rua" maxlength="500" autocomplete="address-line1" placeholder="Rua das Flores"></label><label>Número<input name="numero" maxlength="30" autocomplete="off" placeholder="123"></label><label>Complemento<input name="complemento" maxlength="150" autocomplete="address-line2" placeholder="Casa 2 ou Apto 45"></label><label>Bairro<input name="bairro" maxlength="150" autocomplete="off" placeholder="Centro"></label><label>Cidade<input name="cidade" maxlength="150" autocomplete="address-level2" placeholder="São Paulo"></label><label>Estado / UF<input name="estado" maxlength="60" autocomplete="address-level1" placeholder="SP"></label><label>CEP<input name="cep" maxlength="9" autocomplete="postal-code" inputmode="numeric" placeholder="01234-567"></label></div></fieldset><label>Email<input name="email" type="email" maxlength="254" autocomplete="email" placeholder="cliente@exemplo.com"></label></div><div class="dialog-actions"><button type="button" id="deleteClient" class="danger delete-one" hidden>Excluir</button><button type="button" id="cancelDialog">Cancelar</button><button type="submit" class="primary">Salvar cliente</button></div></form></dialog>
+<dialog id="dataConfirmDialog" aria-labelledby="dataConfirmTitle"><form method="dialog"><h2 id="dataConfirmTitle">Confirmar ação</h2><p id="dataConfirmMessage" style="margin-top:14px;white-space:pre-wrap"></p><div class="dialog-actions"><button value="cancel" autofocus>Cancelar</button><button id="dataConfirmAccept" value="confirm" class="danger">Confirmar</button></div></form></dialog>
+<input type="file" id="importFile" accept=".json,application/json" hidden>
+<div class="toast" id="toast" role="status" hidden></div>
+<div id="cloudAuth" class="cloud-auth"><div class="cloud-auth-card">
+<h1>Chicão Rações</h1><p>Acesso de funcionários à Agenda e aos Pedidos.</p>
+<form id="cloudLoginForm"><label>E-mail<input id="cloudLoginEmail" type="email" required autocomplete="email" placeholder="email@exemplo.com"></label>
+<label>Senha<input id="cloudLoginPassword" type="password" required autocomplete="current-password" minlength="6"></label>
+<button type="submit" class="primary">Entrar no sistema</button></form>
+<div class="cloud-auth-actions"><button id="cloudRegister" type="button">Criar minha senha</button><button id="cloudRecover" type="button">Esqueci minha senha</button></div>
+<form id="cloudRecoveryForm" hidden>
+<h2>Definir nova senha</h2>
+<p>O link de recuperação foi validado. Escolha uma nova senha para sua conta.</p>
+<label>Nova senha<input id="cloudNewPassword" type="password" minlength="8" required autocomplete="new-password" placeholder="No mínimo 8 caracteres"></label>
+<label>Confirmar nova senha<input id="cloudConfirmPassword" type="password" minlength="8" required autocomplete="new-password" placeholder="Digite a senha novamente"></label>
+<button type="submit" class="primary">Salvar nova senha</button>
+</form>
+<p id="cloudLoginMessage" role="status"></p></div></div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.57.0/dist/umd/supabase.min.js"></script>
+<script>
+'use strict';
+const KEY='petshop_clientes_v1',APP='petshop-agenda',VERSION=2;
+const FIELDS=['nome','telefone','endereco','email'];
+const LABELS={nome:'Nome',telefone:'Telefone',endereco:'Endereço',email:'Email'};
+const $=id=>document.getElementById(id);
+let clients=[],sortField='nome',direction='asc',activeSort=null,editingId=null,storageReady=true,lastRaw=null,toastTimer;
+const uid=()=>globalThis.crypto?.randomUUID?.()||Date.now().toString(36)+'-'+Math.random().toString(36).slice(2);
+const normalize=value=>String(value??'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLocaleLowerCase('pt-BR');
+const digits=value=>String(value).replace(/\D/g,'');
+
+const ADDRESS_FIELDS=['rua','numero','complemento','bairro','cidade','estado','cep'];
+function formatPhone(value){const n=digits(value);if(n.length<=9)return n;if(n.length<=11)return '('+n.slice(0,2)+') '+n.slice(2);if(n.length===12)return '('+n.slice(0,3)+') '+n.slice(3);const end=n.length===14?5:4;return '+'+n.slice(0,2)+' ('+n.slice(2,end)+') '+n.slice(end);}
+// Rever esta exibição ao aceitar números estrangeiros, cujos prefixos e formatos podem ser diferentes.
+function agendaPhone(value){const n=digits(value);if(!n)return '—';let ddd='00',local=n;if(n.length===10||n.length===11){ddd=n.slice(0,2);local=n.slice(2);}else if(n.length===12){ddd=n.slice(1,3);local=n.slice(3);}else if(n.length===13){ddd=n.slice(2,4);local=n.slice(4);}else if(n.length===14){ddd=n.slice(3,5);local=n.slice(5);}return '+55 ('+ddd+') '+local;}
+function addressText(a){const street=[a.rua,a.numero].filter(Boolean).join(', ');const city=[a.cidade,a.estado].filter(Boolean).join('/');return [street,a.complemento,a.bairro,city,a.cep].filter(Boolean).join(' — ');}
+
+function matches(client,query){const terms=normalize(query).trim().split(/\s+/).filter(Boolean);const hay=FIELDS.map(field=>normalize(client[field])).join(' ');const phone=digits(client.telefone);return terms.every(term=>hay.includes(term)||(/^[\d()+.\-]+$/.test(term)&&digits(term)&&phone.includes(digits(term))));}
+function decode(data){
+if(!data||typeof data!=='object')throw Error('O arquivo não contém um backup válido.');
+if(data.app&&data.app!==APP)throw Error('Este arquivo pertence a outro aplicativo.');
+const version=data.schemaVersion??data.version??data.versao??0;
+if(!Number.isInteger(version)||version<0)throw Error('A versão do backup é inválida.');
+const source=Array.isArray(data)?data:(data.clientes??data.clients);
+if(!Array.isArray(source))throw Error('O backup deve conter uma lista de clientes.');
+const ids=new Set();
+const records=source.map((item,index)=>{
+if(!item||typeof item!=='object'||Array.isArray(item))throw Error('Cadastro inválido na posição '+(index+1)+'.');
+const c={id:typeof item.id==='string'&&item.id?item.id:uid()};
+if(ids.has(c.id))c.id=uid();ids.add(c.id);
+const aliases={nome:'name',telefone:'phone',endereco:'address',email:'email'};
+for(const field of FIELDS){const value=item[field]??item[aliases[field]]??(field==='endereco'?item['endereço']:undefined)??'';if(typeof value!=='string'&&typeof value!=='number')throw Error('Campo inválido no cadastro '+(index+1)+'.');c[field]=String(value).trim();}
+if(!c.nome)throw Error('O cadastro '+(index+1)+' não tem nome. Nenhum dado foi importado.');
+c.whatsapp=item.whatsapp===true;
+const parts=item.enderecoDetalhado;
+if(parts!==undefined&&(!parts||typeof parts!=='object'||Array.isArray(parts)))throw Error('Endereço detalhado inválido.');
+c.enderecoDetalhado={};
+for(const key of ADDRESS_FIELDS){const value=parts?.[key]??'';if(typeof value!=='string'&&typeof value!=='number')throw Error('Campo de endereço inválido.');c.enderecoDetalhado[key]=String(value).trim();}
+if(!parts)c.enderecoDetalhado.rua=c.endereco;
+if(parts)c.endereco=addressText(c.enderecoDetalhado);
+c.telefone=formatPhone(c.telefone);
+return c;
+});return {records,version};
+}
+function envelope(records){return {app:APP,schemaVersion:VERSION,exportedAt:new Date().toISOString(),clientes:records};}
+function notify(message){clearTimeout(toastTimer);$('toast').textContent=message;$('toast').hidden=false;toastTimer=setTimeout(()=>$('toast').hidden=true,6000);}
+function warn(message){$('storageWarning').textContent=message;$('storageWarning').hidden=false;}
+function load(){try{lastRaw=localStorage.getItem(KEY);clients=lastRaw?decode(JSON.parse(lastRaw)).records:[];storageReady=true;$('storageWarning').hidden=true;}catch(error){storageReady=false;warn('Não foi possível ler os dados locais. Nada foi sobrescrito. Exporte uma cópia para recuperação ou importe um backup válido.');}}
+async function commit(next){return cloudCommit(next);}
+
+function render(){
+const query=$('search').value;const shown=clients.filter(c=>matches(c,query)).sort((a,b)=>{const compare=a[sortField].localeCompare(b[sortField],'pt-BR',{sensitivity:'base',numeric:true});return (direction==='asc'?1:-1)*compare||a.nome.localeCompare(b.nome,'pt-BR',{sensitivity:'base'});});
+$('rows').replaceChildren();const fragment=document.createDocumentFragment();
+for(const client of shown){const row=document.createElement('tr');for(const field of FIELDS){const cell=document.createElement('td');if(field==='nome'){const wrap=document.createElement('div');wrap.className='client-name';const avatar=document.createElement('span');avatar.className='avatar';avatar.setAttribute('aria-hidden','true');avatar.textContent=client.nome.split(/\s+/).slice(0,2).map(s=>s[0]).join('').toUpperCase();const button=document.createElement('button');button.className='edit';button.textContent=client.nome;button.setAttribute('aria-label','Editar '+client.nome);button.addEventListener('click',()=>openClient(client));wrap.append(avatar,button);cell.append(wrap);}else if(field==='telefone'){const wrap=document.createElement('span');wrap.className='phone-display';const number=document.createElement('span');number.textContent=agendaPhone(client.telefone);number.className='agenda-phone';wrap.append(number);if(client.whatsapp){const icon=document.createElement('span');icon.innerHTML='<svg class="wa-icon" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18a8 8 0 0 1-4.1-1.1l-.4-.2-2.6.7.7-2.5-.3-.4A8 8 0 1 1 12 20Z"/><path fill="currentColor" d="M8 7c-.5 0-1.5 1-1.5 2.2 0 2.8 4.5 7.2 7.6 7.2 1.4 0 2.5-1.1 2.5-1.9 0-.3-.1-.4-.4-.5l-2-1c-.3-.1-.5-.1-.7.2l-.8 1c-.2.2-.4.2-.7.1a7 7 0 0 1-3.5-3.1c-.2-.3-.1-.5.1-.7l.6-.8c.2-.2.2-.4.1-.7L8.5 7.3C8.4 7 8.2 7 8 7Z"/></svg>';icon.setAttribute('role','img');icon.setAttribute('aria-label','Possui WhatsApp');icon.title='Possui WhatsApp';wrap.append(icon);}cell.append(wrap);}else cell.textContent=client[field]||'—';row.append(cell);}fragment.append(row);}
+$('rows').append(fragment);$('count').textContent=clients.length;$('empty').hidden=shown.length>0;$('emptyTitle').textContent=clients.length?'Nenhum cliente encontrado':'Agenda vazia';$('emptyText').textContent=clients.length?'Tente outros termos ou limpe a pesquisa.':'Clique em “Novo cliente” para fazer seu primeiro cadastro.';$('results').textContent=query.trim()?shown.length+' de '+clients.length+' clientes encontrados':clients.length+' cliente'+(clients.length===1?' cadastrado':'s cadastrados');$('clearSearch').hidden=!query;$('sortLabel').textContent=LABELS[sortField]+' · '+(direction==='asc'?'A a Z':'Z a A');
+for(const button of document.querySelectorAll('.sort-button')){button.parentElement.removeAttribute('aria-sort');if(button.dataset.field===sortField)button.parentElement.setAttribute('aria-sort',direction==='asc'?'ascending':'descending');}
+}
+function closeSort(focus=false){const previous=activeSort;$('sortbarra').hidden=true;if(previous){previous.textContent='▽';previous.setAttribute('aria-expanded','false');}activeSort=null;if(focus)previous?.focus();}
+function openClient(client=null){editingId=client?.id??null;$('clientForm').reset();for(const field of ['nome','telefone','email'])$('clientForm').elements[field].value=client?.[field]??'';for(const field of ADDRESS_FIELDS)$('clientForm').elements[field].value=client?.enderecoDetalhado?.[field]??(field==='rua'?client?.endereco??'':'');$('clientForm').elements.whatsapp.checked=client?.whatsapp===true;$('phoneError').hidden=true;validatePhone();$('dialogTitle').textContent=client?'Editar cliente':'Novo cliente';$('deleteClient').hidden=!client;$('clientDialog').showModal();$('clientForm').elements.nome.focus();}
+$('logo').addEventListener('error',()=>{$('logo').hidden=true;$('logoFallback').hidden=false;});if($('logo').complete&&!$('logo').naturalWidth){$('logo').hidden=true;$('logoFallback').hidden=false;}
+const sidebar=$('sidebar');
+let lastPointerX=null;
+function closeHoverIfOutside(){if(!sidebar.classList.contains('hovered')||sidebar.classList.contains('open')||lastPointerX===null)return;const style=getComputedStyle(sidebar);const expandedWidth=parseFloat(style.getPropertyValue('--sidebar-expanded-width'));const rect=sidebar.getBoundingClientRect();if(rect.width<expandedWidth-0.5)return;const closeAt=rect.right-parseFloat(style.getPropertyValue('--hover-close-gap'));if(lastPointerX>=closeAt)sidebar.classList.remove('hovered');}
+sidebar.addEventListener('pointerenter',event=>{if(event.pointerType==='mouse'){lastPointerX=event.clientX;sidebar.classList.add('hovered');}});
+document.addEventListener('pointermove',event=>{if(event.pointerType!=='mouse')return;lastPointerX=event.clientX;closeHoverIfOutside();});
+sidebar.addEventListener('transitionend',event=>{if(event.propertyName==='width')closeHoverIfOutside();});
+$('barraToggle').onclick=()=>{const expanded=$('sidebar').classList.toggle('open');$('barraToggle').setAttribute('aria-expanded',expanded);$('barraToggle').querySelector('span').textContent=expanded?'Recolher barra':'Fixar barra';};
+for(const button of document.querySelectorAll('[data-page]'))button.onclick=()=>{for(const nav of document.querySelectorAll('[data-page]')){const selected=nav===button;nav.classList.toggle('active',selected);if(selected)nav.setAttribute('aria-current','page');else nav.removeAttribute('aria-current');$(nav.dataset.page).hidden=!selected;}closeSort();};
+
+const phoneInput=$('clientForm').elements.telefone;
+let phoneSnapshot={value:'',start:0,end:0};
+function rememberPhone(){phoneSnapshot={value:phoneInput.value,start:phoneInput.selectionStart,end:phoneInput.selectionEnd};}
+phoneInput.addEventListener('focus',rememberPhone);
+function validatePhone(){const length=digits(phoneInput.value).length;const valid=length>=9&&length<=14;phoneInput.setCustomValidity(valid?'':'Informe um número de celular válido, com 9 a 14 dígitos.');return valid;}
+function putPhone(raw,caret){if(raw.length>14){phoneInput.value=phoneSnapshot.value;phoneInput.setSelectionRange(phoneSnapshot.start,phoneSnapshot.end);return;}phoneInput.value=formatPhone(raw);let pos=0,count=0;while(pos<phoneInput.value.length&&count<caret){if(/[0-9]/.test(phoneInput.value[pos]))count++;pos++;}phoneInput.setSelectionRange(pos,pos);validatePhone();$('phoneError').hidden=true;rememberPhone();}
+phoneInput.addEventListener('beforeinput',event=>{rememberPhone();const type=event.inputType;if(type.startsWith('insert')&&event.data){const selected=digits(phoneInput.value.slice(phoneInput.selectionStart,phoneInput.selectionEnd)).length;if(digits(phoneInput.value).length-selected+digits(event.data).length>14){event.preventDefault();return;}}if(type==='insertText'&&event.data&&!/^[0-9]+$/.test(event.data)){event.preventDefault();return;}if(type==='deleteContentBackward'||type==='deleteContentForward'){event.preventDefault();const raw=digits(phoneInput.value);let start=digits(phoneInput.value.slice(0,phoneInput.selectionStart)).length,end=digits(phoneInput.value.slice(0,phoneInput.selectionEnd)).length;if(start===end){if(type==='deleteContentBackward')start=Math.max(0,start-1);else end=Math.min(raw.length,end+1);}putPhone(raw.slice(0,start)+raw.slice(end),start);}});
+phoneInput.addEventListener('paste',event=>{event.preventDefault();rememberPhone();const add=digits(event.clipboardData.getData('text'));const raw=digits(phoneInput.value),start=digits(phoneInput.value.slice(0,phoneInput.selectionStart)).length,end=digits(phoneInput.value.slice(0,phoneInput.selectionEnd)).length;if(raw.length-(end-start)+add.length>14)return;putPhone(raw.slice(0,start)+add+raw.slice(end),start+add.length);});
+phoneInput.addEventListener('input',()=>{const caret=digits(phoneInput.value.slice(0,phoneInput.selectionStart)).length;putPhone(digits(phoneInput.value),caret);});
+phoneInput.addEventListener('invalid',()=>{$('phoneError').hidden=false;});
+phoneInput.addEventListener('blur',()=>{$('phoneError').hidden=validatePhone();});
+const cepInput=$('clientForm').elements.cep;cepInput.addEventListener('input',()=>{const n=digits(cepInput.value).slice(0,8);cepInput.value=n.length>5?n.slice(0,5)+'-'+n.slice(5):n;});
+
+$('newClient').onclick=()=>openClient();$('search').addEventListener('input',render);$('clearSearch').onclick=()=>{$('search').value='';render();$('search').focus();};
+for(const button of document.querySelectorAll('.sort-button'))button.onclick=()=>{if(activeSort===button){closeSort();return;}closeSort();activeSort=button;button.textContent='▼';button.setAttribute('aria-expanded','true');const rect=button.getBoundingClientRect();const barra=$('sortbarra');barra.hidden=false;barra.style.left=Math.max(8,Math.min(rect.left,innerWidth-202))+'px';barra.style.top=Math.max(8,Math.min(rect.bottom+7,innerHeight-barra.offsetHeight-8))+'px';barra.querySelector('button').focus();};
+for(const button of document.querySelectorAll('[data-direction]'))button.onclick=()=>{sortField=activeSort.dataset.field;direction=button.dataset.direction;closeSort(true);render();};
+document.addEventListener('click',e=>{if(!e.target.closest('.sort-button')&&!e.target.closest('#sortbarra'))closeSort();});document.addEventListener('keydown',e=>{if(e.key==='Escape')closeSort(true);});window.addEventListener('resize',()=>closeSort());document.addEventListener('scroll',()=>closeSort(),true);
+for(const id of ['cancelDialog','closeDialog'])$(id).onclick=()=>$('clientDialog').close();
+$('clientForm').onsubmit=async e=>{e.preventDefault();const values={id:editingId??uid()};for(const field of ['nome','telefone','email'])values[field]=$('clientForm').elements[field].value.trim();if(!validatePhone()){$('clientForm').elements.telefone.reportValidity();return;}values.telefone=formatPhone(values.telefone);values.whatsapp=$('clientForm').elements.whatsapp.checked;values.enderecoDetalhado={};for(const field of ADDRESS_FIELDS)values.enderecoDetalhado[field]=$('clientForm').elements[field].value.trim();values.endereco=addressText(values.enderecoDetalhado);if(!values.nome){$('clientForm').elements.nome.focus();notify('Informe o nome do cliente.');return;}if(editingId&&!clients.some(c=>c.id===editingId)){notify('Este cadastro não existe mais. Feche e abra novamente.');return;}const next=editingId?clients.map(c=>c.id===editingId?values:c):[...clients,values];if(await commit(next)){$('clientDialog').close();notify('Cliente salvo com sucesso.');}};
+$('deleteClient').onclick=async()=>{if(confirm('Excluir este cliente? Esta ação não pode ser desfeita.')&&await commit(clients.filter(c=>c.id!==editingId))){$('clientDialog').close();notify('Cliente excluído.');}};
+function download(text,name){const url=URL.createObjectURL(new Blob([text],{type:'application/json;charset=utf-8'}));const a=document.createElement('a');a.href=url;a.download=name;document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);}
+
+function confirmDataAction(title,message,action){return new Promise(resolve=>{const dialog=$('dataConfirmDialog');$('dataConfirmTitle').textContent=title;$('dataConfirmMessage').textContent=message;$('dataConfirmAccept').textContent=action;dialog.returnValue='cancel';dialog.addEventListener('close',()=>resolve(dialog.returnValue==='confirm'),{once:true});dialog.showModal();});}
+
+$('exportData').onclick=()=>{if(!cloudValid()){notify('Faça login para exportar a Agenda.');return;}if(!storageReady){notify('Os cadastros antigos neste navegador não puderam ser lidos. A exportação abaixo contém a Agenda do Supabase.');}download(JSON.stringify(envelope(clients),null,2),'petshop-backup-'+new Date().toISOString().slice(0,10)+'.json');notify('Backup exportado.');};
+$('importData').onclick=()=>$('importFile').click();
+$('importFile').onchange=async e=>{const file=e.target.files[0];e.target.value='';if(!file)return;try{if(file.size>20*1024*1024)throw Error('O arquivo excede o limite de 20 MB.');const result=decode(JSON.parse((await file.text()).replace(/^\uFEFF/,'')));const future=result.version>VERSION?' Este backup é de uma versão mais nova. Somente os campos reconhecidos por esta versão serão aproveitados.':'';if(!await confirmDataAction('Importar dados','Importar '+result.records.length+' cliente(s) e mesclar com os '+clients.length+' cadastro(s) remotos, sem excluir outros clientes? Registros com o mesmo ID serão atualizados. Exporte um backup antes.'+future,'Importar e substituir'))return;if(await cloudMerge(result.records))notify('Backup importado com sucesso.');}catch(error){notify(error instanceof SyntaxError?'Arquivo JSON inválido. Nenhum dado foi alterado.':error.message);}};
+$('deleteData').onclick=async()=>{try{if(!await confirmDataAction('Excluir dados','Excluir os '+clients.length+' cadastro(s) da Agenda compartilhada de todos os funcionários? Esta ação não pode ser desfeita. Exporte um backup antes se quiser preservar os dados.','Excluir dados'))return;if(await cloudDeleteAll()){$('search').value='';render();notify('Clientes removidos da Agenda compartilhada.');}}catch(error){notify('Não foi possível excluir os dados. '+error.message);}};
+window.addEventListener('storage',e=>{if(e.key===KEY)notify('Há uma alteração nos dados locais antigos. Use a opção de migração em Dados.');});
+load();clients=[];render();$('storageWarning').hidden=true;
+</script>
+<script>
+(()=>{
+
+const $=id=>document.getElementById(id);
+const money=c=>new Intl.NumberFormat('pt-BR',{style:'currency',currency:'BRL'}).format(c/100);
+const number=s=>Number(String(s).trim().replace(',','.'));
+function quantityNumber(value){return /^[0-9]{1,3}$/.test(String(value))?Number(value):NaN;}
+const unitCents=s=>Math.round(number(s)*100);
+
+const DRAFT_KEY='petshop_pedido_rascunho_v1';
+const DRAFT_FIELDS=['ord-client','ord-phone','ord-street','ord-number','ord-extra'];
+let draftReady=false;
+let deliveryPrice="5,00";
+function draftStatus(text,error=false){$('orderDraftStatus').textContent=text;$('orderDraftStatus').style.color=error?'#b93939':'';}
+function readDraftForm(){return {schemaVersion:1,updatedAt:new Date().toISOString(),customer:Object.fromEntries(DRAFT_FIELDS.map(id=>[id,$(id).value])),payment:selectedPayment(),paid:$('ord-paid').checked,delivery:$('ord-delivery').checked,deliveryPrice,items:[...$('ord-items').children].filter(row=>!row.classList.contains('delivery-fee')).map(row=>({product:row.querySelector('.product').value,qty:row.querySelector('.qty').value,price:row.querySelector('.price').value}))};}
+function validateDraft(data){if(!data||data.schemaVersion!==1||!data.customer||!Array.isArray(data.items)||!data.items.length||!['','Dinheiro','Cartão','Pix','Pagamento a prazo'].includes(data.payment)||typeof data.paid!=='boolean')throw Error('Rascunho inválido ou de versão incompatível.');for(const id of DRAFT_FIELDS)if(typeof data.customer[id]!=='string')throw Error('Dados do cliente inválidos.');for(const item of data.items)if(!item||['product','qty','price'].some(key=>typeof item[key]!=='string'))throw Error('Produtos inválidos.');if(data.delivery!==undefined&&typeof data.delivery!=='boolean')throw Error('Entrega inválida.');return data;}
+function saveOrderDraft(){if(!draftReady)return;try{localStorage.setItem(DRAFT_KEY,JSON.stringify(readDraftForm()));draftStatus('Rascunho salvo neste navegador.');}catch(error){draftStatus('Não foi possível salvar o rascunho. Mantenha esta página aberta e verifique o armazenamento do navegador.',true);}}
+function restoreOrderDraft(){try{const raw=localStorage.getItem(DRAFT_KEY);if(!raw)return true;const data=validateDraft(JSON.parse(raw));for(const id of DRAFT_FIELDS)$(id).value=data.customer[id];for(const option of document.querySelectorAll('#ord-order-form input[name="orderPayment"]'))option.checked=option.value===data.payment;$('ord-paid').checked=data.paid&&data.payment!=='Pagamento a prazo';$('ord-delivery').checked=data.delivery===true;deliveryPrice=typeof data.deliveryPrice==='string'&&/^[0-9]{1,5}(,[0-9]{1,2})?$/.test(data.deliveryPrice)?data.deliveryPrice:'5,00';$('ord-items').replaceChildren();for(const item of data.items){const row=addItem();row.querySelector('.product').value=item.product;row.querySelector('.qty').value=item.qty;row.querySelector('.price').value=item.price;}validatePhone();rememberPhone();update();draftStatus('Pedido em andamento restaurado.');return true;}catch(error){draftStatus('Não foi possível restaurar o rascunho. Ele foi preservado; use Limpar dados preenchidos para descartá-lo e começar outro.',true);return false;}}
+function eraseOrderDraft(){try{localStorage.removeItem(DRAFT_KEY);draftReady=false;return true;}catch(error){draftStatus('Não foi possível apagar o rascunho salvo. Os dados preenchidos foram mantidos.',true);return false;}}
+
+let sequence=0;
+function stamp(){const now=new Date();$('ord-today').textContent=now.toLocaleDateString('pt-BR',{day:'2-digit',month:'long',year:'numeric'});$('ord-receipt-date').textContent=now.toLocaleString('pt-BR',{dateStyle:'short',timeStyle:'short'});}
+function addItem(){const row=document.createElement('div');row.className='item-row';const id=++sequence;row.innerHTML=`<label><span class="mobile-label">Produto</span><input class="product" aria-label="Produto ${id}" placeholder="Nome do produto" required maxlength="200"></label><label><span class="mobile-label">Qtd.</span><input class="qty" aria-label="Quantidade do produto ${id}" type="text" inputmode="numeric" value="1" required pattern="[0-9]{1,3}"></label><label><span class="mobile-label">Valor unit.</span><input class="price" aria-label="Valor unitário do produto ${id} em reais" type="text" inputmode="decimal" placeholder="0,00" required pattern="[0-9]{1,5}(,[0-9]{1,2})?"></label><span class="subtotal">R$ 0,00</span><button type="button" class="remove" aria-label="Remover produto ${id}" title="Remover produto">×</button>`;row.querySelector('.remove').onclick=()=>{row.remove();if(!$('ord-items').querySelector('.item-row:not(.delivery-fee)'))addItem();update();};$('ord-items').append(row);update();return row;}
+function syncDeliveryFee(){
+const container=$('ord-items');let subtotal=0;
+for(const row of container.querySelectorAll('.item-row:not(.delivery-fee)')){
+const qty=row.querySelector('.qty').value,price=row.querySelector('.price').value,q=quantityNumber(qty),p=unitCents(price);
+if(/^[0-9]{1,5}(,[0-9]{1,2})?$/.test(price)&&Number.isFinite(q)&&q>0&&q<=999&&Number.isFinite(p)&&p>=0&&p<=9999999)subtotal+=q*p;
+}
+let fee=container.querySelector('.delivery-fee');if(fee)deliveryPrice=fee.querySelector('.price').value;
+if(!$('ord-delivery').checked||subtotal>=10000){if(fee)fee.remove();return;}
+if(!fee){fee=document.createElement('div');fee.className='item-row delivery-fee';fee.innerHTML='<label><span class="mobile-label">Produto</span><input class="product" aria-label="Taxa de entrega automática" value="Taxa de entrega" readonly></label><label class="delivery-quantity" hidden><input class="qty" type="hidden" value="1"></label><label><span class="mobile-label">Valor unit.</span><input class="price" aria-label="Valor da taxa de entrega" title="Ctrl + clique para editar" inputmode="decimal" required pattern="[0-9]{1,5}(,[0-9]{1,2})?" value="5,00" readonly></label><span class="subtotal">R$ 5,00</span><span></span>';}
+const price=fee.querySelector('.price');if(!fee.isConnected)price.value=deliveryPrice;
+if(!price.dataset.editBound){
+price.dataset.editBound='true';price.tabIndex=-1;
+let originalValue=price.value;
+const lock=()=>{if(price.readOnly)return;if(!/^[0-9]{1,5}(,[0-9]{1,2})?$/.test(price.value))price.value=originalValue;price.readOnly=true;price.tabIndex=-1;price.setSelectionRange(0,0);deliveryPrice=price.value;price.blur();update();};
+price.onpointerdown=event=>{if(!price.readOnly)return;event.preventDefault();if(event.ctrlKey&&event.button===0){originalValue=price.value;price.readOnly=false;price.tabIndex=0;price.focus();price.setSelectionRange(price.value.length,price.value.length);}};
+price.onmousedown=event=>{if(price.readOnly)event.preventDefault();};
+price.onselectstart=event=>{if(price.readOnly)event.preventDefault();};
+price.onselect=()=>{if(price.readOnly&&(price.selectionStart!==0||price.selectionEnd!==0))price.setSelectionRange(0,0);};
+price.onfocus=()=>{if(price.readOnly)price.blur();};
+price.onblur=()=>{if(!price.readOnly&&price.value!==originalValue)lock();};
+price.onkeydown=event=>{if(event.key==='Enter'){event.preventDefault();event.stopPropagation();lock();}};
+}
+
+if(container.lastElementChild!==fee)container.append(fee);
+}
+function update(){syncDeliveryFee();updateCustomerReceipt();$('ord-r-client').textContent=$('ord-client').value.trim()||'—';let total=0;const rows=[...$('ord-items').children];$('ord-item-count').textContent=rows.length+' '+(rows.length===1?'item':'itens');$('ord-r-items').replaceChildren();for(const row of rows){const qty=row.querySelector('.qty'),price=row.querySelector('.price');qty.setCustomValidity('');price.setCustomValidity('');const q=quantityNumber(qty.value),p=unitCents(price.value);if(qty.value&&(!Number.isFinite(q)||q<=0||q>999))qty.setCustomValidity('Informe uma quantidade inteira de 1 a 999.');if(price.value&&(!Number.isFinite(p)||p<0||p>9999999))price.setCustomValidity('Informe um valor válido de até R$ 99.999,99.');const value=qty.validity.valid&&price.validity.valid?Math.round(q*p):0;total+=value;row.querySelector('.subtotal').textContent=money(value);const name=row.querySelector('.product').value.trim();if(name){const item=document.createElement('div');item.className='receipt-item';const title=document.createElement('strong');title.textContent=name;const line=document.createElement('div');const details=document.createElement('span');details.textContent=(qty.value.trim()||'—')+' × '+money(Number.isFinite(p)?p:0);const amount=document.createElement('span');amount.textContent=money(value);if(row.classList.contains('delivery-fee')){item.classList.add('receipt-delivery-fee');item.append(title,amount);}else{line.append(details,amount);item.append(title,line);}$('ord-r-items').append(item);}}if(!$('ord-r-items').children.length){const empty=document.createElement('p');empty.className='receipt-empty';empty.textContent='Os produtos aparecerão aqui.';$('ord-r-items').append(empty);}$('ord-total').textContent=$('ord-r-total').textContent=money(total);$('ord-message').textContent='';saveOrderDraft();}
+$('ord-add-item').onclick=()=>addItem().querySelector('input').focus();$('ord-clear-form').onclick=async()=>{if(!await confirmDataAction('Limpar pedido','Limpar todos os dados deste pedido e apagar o rascunho salvo?','Limpar pedido'))return;if(!eraseOrderDraft())return;deliveryPrice='5,00';$('ord-order-form').reset();$('ord-items').replaceChildren();addItem();stamp();hideCustomer();draftReady=true;draftStatus('Rascunho apagado. Pronto para um novo pedido.');$('ord-client').focus();};$('ord-order-form').addEventListener('input',update);$('ord-order-form').addEventListener('submit',e=>{e.preventDefault();if(!$('ord-client').value.trim()){$('ord-client').setCustomValidity('Informe o nome do cliente.');$('ord-client').reportValidity();return;}for(const input of document.querySelectorAll('#pedidos .product'))if(!input.value.trim()){input.setCustomValidity('Informe o nome do produto.');input.reportValidity();return;}update();if(!$('ord-order-form').reportValidity())return;stamp();window.print();});$('ord-order-form').addEventListener('input',e=>{if(e.target.matches('#ord-client,.product'))e.target.setCustomValidity('');});window.addEventListener('beforeprint',stamp);stamp();addItem();
+
+
+
+
+function selectedPayment(){return document.querySelector('#ord-order-form input[name="orderPayment"]:checked')?.value||'';}
+function updateCustomerReceipt(){
+const phone=$('ord-phone').value.trim(),street=$('ord-street').value.trim(),number=$('ord-number').value.trim(),extra=$('ord-extra').value.trim();
+$('ord-r-phone').textContent=phone?agendaPhone(phone):'';$('ord-r-phone').hidden=!phone;
+const address=[[street,number].filter(Boolean).join(', '),extra].filter(Boolean).join(' — ');$('ord-r-address').textContent=address;$('ord-r-address').hidden=!address;
+const payment=selectedPayment();if(payment==='Pagamento a prazo')$('ord-paid').checked=false;$('ord-paid').disabled=payment==='Pagamento a prazo';$('ord-paid-mark').hidden=!$('ord-paid').checked;
+const receipt=$('ord-r-payment');receipt.replaceChildren();if(payment){receipt.textContent='Forma de pagamento: '+payment;}else{const grid=document.createElement('div');grid.className='payment-paper-grid';for(const name of ['Dinheiro','Cartão','Pix','Pagamento a prazo']){const label=document.createElement('div');label.className='payment-paper-choice';const text=document.createElement('span');text.textContent=name;const box=document.createElement('span');box.className='paper-checkbox';label.append(text,box);grid.append(label);}receipt.append(grid);}
+}
+const choices=$('orderCustomers');
+const customerInputs=['ord-client','ord-phone','ord-street','ord-number','ord-extra'].map($);
+function hideCustomer(){choices.hidden=true;choices.replaceChildren();}
+function suggestCustomers(event){choices.replaceChildren();const query=event.target.value.trim();if(!query){choices.hidden=true;return;}const found=clients.filter(c=>matches(c,query)).sort((a,b)=>a.nome.localeCompare(b.nome,'pt-BR')).slice(0,12);for(const c of found){const button=document.createElement('button');button.type='button';const title=document.createElement('strong');title.textContent=c.nome;const info=document.createElement('small');info.textContent=[c.telefone,c.endereco].filter(Boolean).join(' · ');button.append(title,info);button.onclick=()=>{const address=c.enderecoDetalhado||{};$('ord-client').value=c.nome;$('ord-client').setCustomValidity('');$('ord-phone').value=c.telefone?agendaPhone(c.telefone):'';$('ord-phone').setCustomValidity('');$('ord-street').value=address.rua??c.endereco??'';$('ord-number').value=address.numero??'';$('ord-extra').value=address.complemento??'';hideCustomer();update();};choices.append(button);}choices.hidden=!found.length;}
+for(const input of customerInputs){input.addEventListener('input',suggestCustomers);input.addEventListener('focus',suggestCustomers);input.addEventListener('keydown',event=>{if(event.key==='Escape')hideCustomer();if(event.key==='ArrowDown'&&!choices.hidden){event.preventDefault();choices.querySelector('button')?.focus();}});}
+document.addEventListener('click',event=>{if(!choices.contains(event.target)&&!customerInputs.includes(event.target))hideCustomer();});
+for(const option of document.querySelectorAll('#ord-order-form input[name="orderPayment"]'))option.addEventListener('change',()=>{if(option.checked)for(const other of document.querySelectorAll('#ord-order-form input[name="orderPayment"]'))if(other!==option)other.checked=false;update();});
+$('ord-paid').addEventListener('change',update);
+$('ord-delivery').addEventListener('change',update);
+updateCustomerReceipt();
+
+const phoneInput=$('ord-phone');phoneInput.inputMode='numeric';phoneInput.removeAttribute('maxlength');$('ord-order-form').addEventListener('reset',()=>{phoneInput.setCustomValidity('');});
+let phoneSnapshot={value:'',start:0,end:0};
+function rememberPhone(){phoneSnapshot={value:phoneInput.value,start:phoneInput.selectionStart,end:phoneInput.selectionEnd};}
+phoneInput.addEventListener('focus',rememberPhone);
+function validatePhone(){const length=digits(phoneInput.value).length;const valid=length===0||(length>=9&&length<=14);phoneInput.setCustomValidity(valid?'':'Informe um número de celular válido, com 9 a 14 dígitos.');return valid;}
+function putPhone(raw,caret){if(raw.length>14){phoneInput.value=phoneSnapshot.value;phoneInput.setSelectionRange(phoneSnapshot.start,phoneSnapshot.end);return;}phoneInput.value=formatPhone(raw);let pos=0,count=0;while(pos<phoneInput.value.length&&count<caret){if(/[0-9]/.test(phoneInput.value[pos]))count++;pos++;}phoneInput.setSelectionRange(pos,pos);validatePhone();rememberPhone();update();suggestCustomers({target:phoneInput});}
+phoneInput.addEventListener('beforeinput',event=>{rememberPhone();const type=event.inputType;if(type.startsWith('insert')&&event.data){const selected=digits(phoneInput.value.slice(phoneInput.selectionStart,phoneInput.selectionEnd)).length;if(digits(phoneInput.value).length-selected+digits(event.data).length>14){event.preventDefault();return;}}if(type==='insertText'&&event.data&&!/^[0-9]+$/.test(event.data)){event.preventDefault();return;}if(type==='deleteContentBackward'||type==='deleteContentForward'){event.preventDefault();const raw=digits(phoneInput.value);let start=digits(phoneInput.value.slice(0,phoneInput.selectionStart)).length,end=digits(phoneInput.value.slice(0,phoneInput.selectionEnd)).length;if(start===end){if(type==='deleteContentBackward')start=Math.max(0,start-1);else end=Math.min(raw.length,end+1);}putPhone(raw.slice(0,start)+raw.slice(end),start);}});
+phoneInput.addEventListener('paste',event=>{event.preventDefault();rememberPhone();const add=digits(event.clipboardData.getData('text'));const raw=digits(phoneInput.value),start=digits(phoneInput.value.slice(0,phoneInput.selectionStart)).length,end=digits(phoneInput.value.slice(0,phoneInput.selectionEnd)).length;if(raw.length-(end-start)+add.length>14)return;putPhone(raw.slice(0,start)+add+raw.slice(end),start+add.length);});
+phoneInput.addEventListener('input',()=>{const caret=digits(phoneInput.value.slice(0,phoneInput.selectionStart)).length;putPhone(digits(phoneInput.value),caret);});
+
+phoneInput.addEventListener('blur',()=>{if(validatePhone()&&phoneInput.value)phoneInput.value=agendaPhone(phoneInput.value);rememberPhone();update();});
+
+
+function validProductText(input,value){return input.matches('.qty')?/^[0-9]{0,3}$/.test(value):/^[0-9]{0,5}(,[0-9]*)?$/.test(value);}
+const productInputs=$('ord-items');
+const productSnapshots=new WeakMap();
+function rememberProduct(input){productSnapshots.set(input,{value:input.value,start:input.selectionStart,end:input.selectionEnd});}
+productInputs.addEventListener('focusin',event=>{if(event.target.matches('.qty,.price'))rememberProduct(event.target);});
+productInputs.addEventListener('beforeinput',event=>{const input=event.target;if(!input.matches('.qty,.price')||input.readOnly)return;rememberProduct(input);if(!event.inputType.startsWith('insert')||event.data===null)return;const next=input.value.slice(0,input.selectionStart)+event.data+input.value.slice(input.selectionEnd);if(!validProductText(input,next))event.preventDefault();});
+productInputs.addEventListener('paste',event=>{const input=event.target;if(!input.matches('.qty,.price')||input.readOnly)return;event.preventDefault();const text=event.clipboardData.getData('text'),start=input.selectionStart,end=input.selectionEnd;const next=input.value.slice(0,start)+text+input.value.slice(end);if(!validProductText(input,next))return;input.value=next;input.setSelectionRange(start+text.length,start+text.length);rememberProduct(input);update();});
+productInputs.addEventListener('input',event=>{const input=event.target;if(!input.matches('.qty,.price')||input.readOnly)return;if(!validProductText(input,input.value)){const previous=productSnapshots.get(input)||{value:input.matches('.qty')?'1':'',start:0,end:0};input.value=previous.value;input.setSelectionRange(previous.start,previous.end);}rememberProduct(input);update();});
+
+draftReady=restoreOrderDraft();
+})();
+</script>
+<script>
+'use strict';
+const CLOUD_URL='https://hwmdqbzoffsqhcymwrgh.supabase.co';
+const CLOUD_PUBLIC_KEY='sb_publishable_kqvKrBLi8GDXiGaQVaxvBg_LEkCLEFJ';
+const cloudRecoveryLink=new URLSearchParams(location.hash.slice(1)).get('type')==='recovery'
+  ||new URLSearchParams(location.search).get('type')==='recovery';
+const cloud=window.supabase?.createClient(CLOUD_URL,CLOUD_PUBLIC_KEY,{auth:{autoRefreshToken:true,persistSession:true,detectSessionInUrl:true}});
+let cloudProfile=null,cloudChannel=null,cloudLoading=false,cloudReloadLater=false,cloudMutation=false,cloudResetMode=false;
+const cloudVersions=new Map();
+const cloudAdmin=()=>cloudProfile?.ativo===true&&cloudProfile?.papel==='admin';
+const cloudValid=()=>cloudProfile?.ativo===true;
+const cloudStatus=message=>$('cloudSyncStatus').textContent=message;
+const cloudAuthMessage=message=>$('cloudLoginMessage').textContent=message;
+const cloudError=message=>notify(message||'Não foi possível realizar a operação.');
+function cloudRow(c){return {id:c.id,dados:c};}
+async function cloudReadAll(){
+ const records=[],versions=new Map();let from=0;
+ for(;;){
+  const {data,error}=await cloud.from('chiquinho_clientes').select('id,dados,alterado_em').order('id').range(from,from+499);
+  if(error)throw error;
+  for(const row of data){records.push({...row.dados,id:row.id});versions.set(row.id,row.alterado_em);}
+  if(data.length<500)break;from+=500;
+ }
+ return {records,versions};
+}
+async function cloudRefresh(){
+ if(!cloudValid())return;
+ if(cloudLoading||cloudMutation){cloudReloadLater=true;return;}
+ cloudLoading=true;cloudStatus('Sincronizando…');
+ try{
+  const {records,versions}=await cloudReadAll();
+  clients=records;cloudVersions.clear();for(const [k,v] of versions)cloudVersions.set(k,v);
+  render();cloudStatus('Agenda sincronizada · '+clients.length+' clientes');
+ }catch(error){cloudStatus('Sem conexão — tente atualizar');cloudError('Falha ao sincronizar: '+error.message);}
+ finally{cloudLoading=false;if(cloudReloadLater&&!cloudMutation){cloudReloadLater=false;cloudRefresh();}}
+}
+async function cloudCommit(next){
+ if(!cloudValid()){cloudError('Entre com uma conta ativa para alterar a Agenda.');return false;}
+ if(cloudMutation){cloudError('Aguarde a gravação anterior.');return false;}
+ const before=new Map(clients.map(c=>[c.id,c]));const after=new Map(next.map(c=>[c.id,c]));
+ const inserted=[...after.values()].filter(c=>!before.has(c.id));
+ const deleted=[...before.values()].filter(c=>!after.has(c.id));
+ const edited=[...after.values()].filter(c=>before.has(c.id)&&JSON.stringify(c)!==JSON.stringify(before.get(c.id)));
+ if(inserted.length+deleted.length+edited.length!==1){cloudError('Altere somente um cadastro de cada vez.');return false;}
+ cloudMutation=true;
+ try{
+  let result;
+  if(inserted.length){const c=inserted[0];result=await cloud.from('chiquinho_clientes').insert(cloudRow(c));}
+  else if(edited.length){const c=edited[0];result=await cloud.from('chiquinho_clientes').update({dados:c,alterado_em:new Date().toISOString()}).eq('id',c.id).eq('alterado_em',cloudVersions.get(c.id)??'').select('id');if(!result.error&&!result.data?.length)throw Error('Cadastro modificado em outro computador. Atualize a Agenda.');}
+  else {const c=deleted[0];result=await cloud.from('chiquinho_clientes').delete().eq('id',c.id).eq('alterado_em',cloudVersions.get(c.id)??'').select('id');if(!result.error&&!result.data?.length)throw Error('Cadastro alterado ou excluído em outro computador.');}
+  if(result.error)throw result.error;
+  return true;
+ }catch(error){cloudError('Não foi possível salvar: '+error.message);return false;}
+ finally{cloudMutation=false;cloudReloadLater=false;await cloudRefresh();}
+}
+async function cloudMerge(records,{ignoreDuplicates=false}={}){
+ if(!cloudAdmin()){cloudError('Somente o administrador pode importar cadastros.');return false;}
+ if(cloudMutation)return false;
+ cloudMutation=true;
+ try{
+  let list=records;
+  if(ignoreDuplicates){
+   const remote=await cloudReadAll();const ids=new Set(remote.records.map(c=>c.id));
+   const signatures=new Set(remote.records.map(c=>normalize(c.nome)+'|'+digits(c.telefone)));
+   list=records.filter(c=>!ids.has(c.id)&&!signatures.has(normalize(c.nome)+'|'+digits(c.telefone)));
+  }
+  for(let i=0;i<list.length;i+=100){const {error}=await cloud.from('chiquinho_clientes').upsert(list.slice(i,i+100).map(cloudRow),{onConflict:'id',ignoreDuplicates});if(error)throw error;}
+  notify(list.length+' cadastro(s) importado(s).');return true;
+ }catch(error){cloudError('Importação interrompida; alguns registros podem ter sido gravados: '+error.message);return false;}
+ finally{cloudMutation=false;cloudReloadLater=false;await cloudRefresh();}
+}
+async function cloudDeleteAll(){
+ if(!cloudAdmin()){cloudError('Somente administradores podem excluir toda a Agenda.');return false;}
+ if(cloudMutation)return false;
+ cloudMutation=true;
+ try{
+  const {error}=await cloud.from('chiquinho_clientes').delete().neq('id','');
+  if(error)throw error;return true;
+ }catch(error){cloudError('Exclusão não concluída: '+error.message);return false;}
+ finally{cloudMutation=false;cloudReloadLater=false;await cloudRefresh();}
+}
+async function cloudMigrate(){
+ if(!cloudAdmin())return;
+ try{
+  const raw=localStorage.getItem(KEY);if(!raw){notify('Não há cadastros antigos neste navegador.');return;}
+  const records=decode(JSON.parse(raw)).records;
+  if(!records.length){notify('A Agenda antiga está vazia.');return;}
+  if(!await confirmDataAction('Migrar Agenda antiga','Enviar '+records.length+' cadastro(s) antigos ao Supabase, sem apagar os originais nem substituir clientes existentes? Registros já presentes serão ignorados.','Migrar cadastros'))return;
+  await cloudMerge(records,{ignoreDuplicates:true});
+ }catch(error){cloudError('Os dados locais foram preservados. Não foi possível migrar: '+error.message);}
+}
+async function cloudStaffRefresh(){
+ if(!cloudAdmin())return;
+ const [members,pending]=await Promise.all([
+  cloud.from('chiquinho_funcionarios').select('id,email,nome,papel,ativo').order('email'),
+  cloud.from('chiquinho_convites').select('email,nome').order('email')
+ ]);
+ if(members.error||pending.error){cloudError('Erro ao carregar funcionários: '+(members.error||pending.error).message);return;}
+ const area=$('cloudStaffRows');area.replaceChildren();
+ for(const person of members.data){
+  const row=document.createElement('div');row.className='cloud-line';
+  const name=document.createElement('span');name.textContent=(person.nome||'Sem nome')+' · '+person.email+' · '+(person.papel==='admin'?'Administrador':'Funcionário')+' · '+(person.ativo?'Ativo':'Bloqueado');row.append(name);
+  if(person.email.toLowerCase()!=='henrique.brasil.fernandes@gmail.com'){
+   const btn=document.createElement('button');btn.textContent=person.ativo?'Bloquear':'Reativar';
+   btn.onclick=async()=>{if(!await confirmDataAction('Alterar acesso','Deseja '+(person.ativo?'bloquear':'reativar')+' o acesso de '+person.email+'?','Confirmar'))return;const {error}=await cloud.from('chiquinho_funcionarios').update({ativo:!person.ativo}).eq('id',person.id);if(error)cloudError(error.message);else cloudStaffRefresh();};row.append(btn);
+  }area.append(row);
+ }
+ const invites=$('cloudInviteRows');invites.replaceChildren();
+ for(const invite of pending.data){
+  const row=document.createElement('div');row.className='cloud-line';const name=document.createElement('span');name.textContent=invite.nome+' · '+invite.email;
+  const btn=document.createElement('button');btn.textContent='Cancelar';btn.onclick=async()=>{const {error}=await cloud.from('chiquinho_convites').delete().eq('email',invite.email);if(error)cloudError(error.message);else cloudStaffRefresh();};
+  row.append(name,btn);invites.append(row);
+ }
+}
+$('cloudInviteSave').onclick=async()=>{
+ if(!cloudAdmin())return;
+ const nome=$('cloudInviteName').value.trim(),email=$('cloudInviteEmail').value.trim().toLowerCase();
+ if(!nome||!email||!$('cloudInviteEmail').checkValidity()){notify('Informe nome e e-mail válidos.');return;}
+ const {error}=await cloud.from('chiquinho_convites').insert({nome,email});
+ if(error){cloudError('Não foi possível autorizar: '+error.message);return;}
+ $('cloudInviteName').value='';$('cloudInviteEmail').value='';notify('E-mail autorizado. O funcionário já pode criar sua senha e confirmar o e-mail.');cloudStaffRefresh();
+};
+function cloudLock(message=''){
+ cloudProfile=null;clients=[];cloudVersions.clear();render();
+ $('cloudAuth').hidden=false;document.body.classList.add('cloud-locked');$('cloudSession').hidden=true;
+ $('cloudStaffNav').hidden=true;$('cloudMigrate').hidden=true;
+ $('importData').hidden=true;$('deleteData').hidden=true;
+ if(cloudChannel){cloud.removeChannel(cloudChannel);cloudChannel=null;}
+ if(message)cloudAuthMessage(message);
+}
+function cloudEnterRecovery(){
+ cloudResetMode=true;
+ cloudLock();
+ $('cloudLoginForm').hidden=true;
+ $('cloudRegister').parentElement.hidden=true;
+ $('cloudRecoveryForm').hidden=false;
+ cloudAuthMessage('Informe e confirme sua nova senha. Depois clique em Salvar nova senha.');
+ $('cloudNewPassword').focus();
+}
+function cloudExitRecovery(){
+ cloudResetMode=false;
+ $('cloudRecoveryForm').hidden=true;
+ $('cloudLoginForm').hidden=false;
+ $('cloudRegister').parentElement.hidden=false;
+ $('cloudRecoveryForm').reset();
+}
+$('cloudRecoveryForm').onsubmit=async event=>{
+ event.preventDefault();
+ if(!cloud||!cloudResetMode){cloudAuthMessage('Seu link não está válido. Solicite outro e-mail de recuperação.');return;}
+ const password=$('cloudNewPassword').value;
+ if(password.length<8){cloudAuthMessage('A nova senha precisa ter pelo menos 8 caracteres.');return;}
+ if(password!==$('cloudConfirmPassword').value){cloudAuthMessage('As duas senhas não coincidem.');return;}
+ const submit=$('cloudRecoveryForm').querySelector('button[type="submit"]');
+ submit.disabled=true;cloudAuthMessage('Salvando nova senha…');
+ try{
+  const {error}=await cloud.auth.updateUser({password});
+  if(error)throw error;
+  cloudExitRecovery();
+  await cloud.auth.signOut();
+  cloudLock('Senha alterada com sucesso! Entre com seu e-mail e a nova senha.');
+ }catch(error){cloudAuthMessage('Não foi possível alterar a senha: '+error.message);}
+ finally{submit.disabled=false;}
+};
+async function cloudActivate(user){
+ if(!user){cloudLock();return;}
+ const {data,error}=await cloud.from('chiquinho_funcionarios').select('id,email,nome,papel,ativo').eq('id',user.id).maybeSingle();
+ if(error||!data?.ativo){cloudLock('Esta conta ainda não está autorizada ou foi bloqueada. Solicite acesso ao administrador.');return;}
+ cloudProfile=data;$('cloudAuth').hidden=true;document.body.classList.remove('cloud-locked');
+ $('cloudSession').hidden=false;$('cloudUserLabel').textContent=data.nome||user.email;
+ $('cloudStaffNav').hidden=!cloudAdmin();$('cloudMigrate').hidden=!cloudAdmin();
+ $('importData').hidden=!cloudAdmin();$('deleteData').hidden=!cloudAdmin();
+ if(!cloudChannel){
+  cloudChannel=cloud.channel('chiquinho-clientes-v327').on('postgres_changes',{schema:'public',table:'chiquinho_clientes',event:'*'},()=>cloudRefresh()).subscribe(status=>{
+   if(status==='SUBSCRIBED')cloudRefresh();
+   if(status==='CHANNEL_ERROR'||status==='TIMED_OUT')cloudStatus('Conexão instável. Atualizando quando reconectar.');
+  });
+ }
+ await cloudRefresh();if(cloudAdmin())cloudStaffRefresh();
+}
+$('cloudLoginForm').onsubmit=async event=>{
+ event.preventDefault();if(!cloud){cloudAuthMessage('Biblioteca Supabase indisponível. Verifique a conexão com a internet.');return;}
+ const email=$('cloudLoginEmail').value.trim(),password=$('cloudLoginPassword').value;
+ cloudAuthMessage('Entrando…');const {data,error}=await cloud.auth.signInWithPassword({email,password});
+ if(error){cloudAuthMessage(error.message);return;}
+ await cloudActivate(data.user);
+};
+$('cloudRegister').onclick=async()=>{
+ if(!cloud){cloudAuthMessage('Conexão indisponível.');return;}
+ const email=$('cloudLoginEmail').value.trim(),password=$('cloudLoginPassword').value;
+ if(!email||password.length<6){cloudAuthMessage('Digite o e-mail autorizado e uma senha de pelo menos 6 caracteres.');return;}
+ const redirect=location.protocol==='https:'||location.protocol==='http:'?{emailRedirectTo:location.origin+location.pathname}:{};
+ const {error}=await cloud.auth.signUp({email,password,options:redirect});
+ cloudAuthMessage(error?error.message:'Se o e-mail estiver autorizado, confirme o cadastro pelo link recebido. Depois faça login.');
+};
+$('cloudRecover').onclick=async()=>{
+ if(!cloud)return;
+ const email=$('cloudLoginEmail').value.trim();if(!email){cloudAuthMessage('Informe o seu e-mail.');return;}
+ const options=location.protocol==='https:'||location.protocol==='http:'?{redirectTo:location.origin+location.pathname}:{};
+ const {error}=await cloud.auth.resetPasswordForEmail(email,options);
+ cloudAuthMessage(error?error.message:'Se existir uma conta, você receberá orientações de recuperação por e-mail.');
+};
+$('cloudLogout').onclick=async()=>{await cloud.auth.signOut();cloudLock('Sessão encerrada.');};
+$('cloudMigrate').onclick=cloudMigrate;
+if(!cloud){cloudLock('Não foi possível carregar o Supabase. Conecte-se à internet e atualize a página.');}
+else{
+ cloud.auth.onAuthStateChange((event,session)=>{
+  if(event==='SIGNED_OUT'){if(cloudResetMode)cloudExitRecovery();cloudLock();}
+  if(event==='PASSWORD_RECOVERY')cloudEnterRecovery();
+ });
+ cloud.auth.getUser().then(({data,error})=>{
+  if(!error&&data?.user){
+   if(cloudRecoveryLink||cloudResetMode)cloudEnterRecovery();
+   else cloudActivate(data.user);
+  }else cloudLock(cloudRecoveryLink?'O link de recuperação não pôde ser validado. Solicite um novo e-mail.':'Entre com sua conta individual.');
+ }).catch(error=>cloudLock('Falha ao verificar sua sessão: '+error.message));
+ document.addEventListener('visibilitychange',()=>{if(!document.hidden&&cloudValid()){cloud.auth.getUser().then(({data})=>data?.user?cloudActivate(data.user):cloudLock());}});
+}
+</script>
+</body>
+</html>
