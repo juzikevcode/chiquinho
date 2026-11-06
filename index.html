@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#ff9900">
-<title>Chicão · Pedidos e clientes</title>
+<title>Chicão · Pedidos e clientes · v3.2.7</title>
 <link rel="icon" href="assets/favicon.ico" sizes="any">
 <style>
 :root{--sidebar-expanded-width:230px;--hover-close-gap:14px;--orange:#ff9900;--blue:#62abd9;--ink:#27333d;--muted:#6d7880;--line:#e9edf0;--soft:#fff7eb;--danger:#b93939}*{box-sizing:border-box}body{margin:0;background:#fff;color:var(--ink);font:15px/1.5 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}button,input{font:inherit}button{cursor:pointer}button:disabled{cursor:not-allowed;opacity:.5}button,input{outline-offset:4px}button:focus-visible,input:focus-visible{outline:3px solid var(--blue)}button{border:1px solid var(--line);border-radius:11px;background:white;color:var(--ink);padding:10px 17px;font-weight:600;transition:background .15s}button:hover{background:#f5f7f9}.primary{background:var(--orange);border-color:var(--orange);color:#392500}.primary:hover{background:#ef9000}.danger{color:var(--danger);border-color:#eed3d3}.icon{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}.sidebar{position:fixed;inset:0 auto 0 0;width:64px;border-right:1px solid var(--line);background:#62abd9;z-index:20;display:flex;flex-direction:column;padding:20px 12px 20px 8px;overflow:hidden;transition:width .22s,box-shadow .22s}.sidebar.hovered,.sidebar:focus-within,.sidebar.open{width:var(--sidebar-expanded-width);box-shadow:12px 0 35px #27333d0b}.brand{display:flex;align-items:center;gap:14px;height:72px;white-space:nowrap;margin-bottom:28px}.brand img,.brand-fallback{width:50px;height:50px;flex-shrink:0;object-fit:contain;border-radius:14px;background:#286f97;padding:5px}.brand-fallback{display:grid;place-items:center;background:#286f97;color:#fff}.brand-fallback .icon{width:30px;height:30px}.brand strong{font-size:20px}.brand small{display:block;font-size:11px;letter-spacing:1.3px;color:var(--muted);font-weight:500}.nav{display:grid;gap:9px}.nav button,.barra-toggle{border:0;display:flex;align-items:center;gap:18px;width:210px;padding:14px;white-space:nowrap;background:transparent}.nav button.active{background:#286f97;color:#fff}.nav button.active:before{content:"";position:absolute;left:0;width:3px;height:26px;border-radius:0 3px 3px 0;background:var(--orange)}.nav button span,.brand-text,.sidebar-foot{opacity:0;transition:opacity .15s}.sidebar.hovered span,.sidebar:focus-within span,.sidebar.open span,.sidebar.hovered .brand-text,.sidebar:focus-within .brand-text,.sidebar.open .brand-text,.sidebar.hovered .sidebar-foot,.sidebar:focus-within .sidebar-foot,.sidebar.open .sidebar-foot{opacity:1}.sidebar-foot{margin-top:auto;white-space:nowrap;padding:14px;font-size:12px;color:#27333d}.barra-toggle{margin-top:18px;color:#27333d}main{margin-left:64px;max-width:1550px;padding:42px 50px 28px;transition:margin-left .22s}
@@ -20,15 +20,33 @@
 
 #pedidos .payment-options{display:grid;grid-template-columns:1fr 1fr;gap:12px}#pedidos .payment-options label,#pedidos .paid-choice{display:flex;align-items:center;gap:9px;font-size:14px;cursor:pointer}#pedidos .payment-options input,#pedidos .paid-choice input{width:18px;height:18px;margin:0;padding:0;accent-color:#286f97}#pedidos .payment-extras{display:flex;align-items:center;gap:28px;margin-top:22px;border-top:1px solid #e9edf0;padding-top:18px}#pedidos .delivery-fee>label:first-child{grid-column:span 2}#pedidos .delivery-quantity{display:none!important}#pedidos .receipt-delivery-fee{display:flex;justify-content:space-between;gap:12px;font-weight:700}#pedidos .delivery-fee .price[readonly]{user-select:none;-webkit-user-select:none;caret-color:transparent}#pedidos .delivery-fee .price:not([readonly]){cursor:text}#pedidos .delivery-fee input{background:#f0f7fb;color:#286f97;cursor:default}#pedidos .paid-choice:has(input:disabled){opacity:.5;cursor:not-allowed}#pedidos .receipt-phone{font-size:14px;margin-top:6px}#pedidos .receipt-address{font-size:13px;margin-top:5px;line-height:1.4;white-space:normal;overflow-wrap:anywhere}#pedidos .receipt-client-name strong{font-size:23px}#pedidos .receipt-payment{font-size:12px;margin-top:14px;break-inside:avoid}#pedidos .payment-paper-grid{display:grid;grid-template-columns:1fr 1fr;gap:7px 10px}#pedidos .payment-paper-choice{display:flex;justify-content:space-between;align-items:center;gap:3px}#pedidos .paper-checkbox{display:inline-block;border:1px solid #000;width:11px;height:11px;flex-shrink:0}#pedidos .amount-stamp{position:relative;isolation:isolate}#pedidos #ord-paid-mark{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;transform:rotate(-18deg);font-size:81.12px;font-weight:900;color:#555;opacity:.50;pointer-events:none;z-index:1}#pedidos .customer-options{grid-column:1/-1;margin:0}@media(max-width:600px){#pedidos .order-customer-grid{grid-template-columns:1fr}#pedidos .payment-options{grid-template-columns:1fr}}@media print{#pedidos .receipt-client-name strong{font-size:17pt!important}#pedidos .receipt-phone{font-size:11pt}#pedidos .receipt-address{font-size:10pt}#pedidos .receipt-payment{font-size:9pt}#pedidos #ord-paid-mark{print-color-adjust:exact;-webkit-print-color-adjust:exact}}
 #pedidos .receipt-total,#pedidos .receipt-payment{text-align:center}
+
+/* Autenticação e área de equipe da v3.2.7 */
+body.cloud-locked > .sidebar,body.cloud-locked > main{visibility:hidden}
+.cloud-auth{position:fixed;inset:0;z-index:200;background:#f1f7fb;display:grid;place-items:center;padding:16px}
+.cloud-auth-card{width:min(430px,100%);background:#fff;border:1px solid #dce7ed;border-radius:18px;padding:30px;box-shadow:0 12px 48px #1234a118}
+.cloud-auth-card h1{font-size:27px;margin-bottom:8px}.cloud-auth-card label{display:grid;gap:5px;font-size:13px;font-weight:650;margin:13px 0}
+.cloud-auth-card input{border:1px solid #dce7ed;border-radius:9px;padding:12px;width:100%}.cloud-auth-card .primary{width:100%}
+.cloud-auth-card .cloud-auth-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}.cloud-auth-actions button{font-size:12px;padding:7px 9px}
+#cloudLoginMessage{color:#a33b3b;font-size:13px;margin-top:14px;white-space:pre-wrap}
+.cloud-session{position:fixed;right:12px;top:10px;z-index:30;display:flex;align-items:center;gap:8px;background:#fff;border:1px solid #e1e9ee;border-radius:12px;padding:5px 9px;font-size:12px;max-width:calc(100vw - 90px)}
+.cloud-session span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:220px}.cloud-session button{padding:5px 9px;font-size:12px}
+.cloud-panel{border:1px solid #e1ebef;border-radius:14px;padding:20px}.cloud-panel h2{font-size:17px;margin:18px 0 9px}
+.cloud-panel .cloud-inputs{display:flex;gap:8px;flex-wrap:wrap}.cloud-panel input{padding:11px;border:1px solid #dce7ed;border-radius:9px;min-width:180px;flex:1}
+.cloud-panel .cloud-line{display:flex;align-items:center;justify-content:space-between;gap:12px;border-bottom:1px solid #edf1f4;padding:12px 0;flex-wrap:wrap}
+.cloud-line span{overflow-wrap:anywhere}.cloud-line button{padding:7px 12px}
+.cloud-notice{background:#eef6fb;border:1px solid #dce7ed;border-radius:10px;padding:13px;font-size:13px;margin-top:12px}
+@media print{.cloud-auth,.cloud-session{display:none!important}}
 </style>
 </head>
-<body>
+<body class="cloud-locked">
 <svg xmlns="http://www.w3.org/2000/svg" style="display:none"><symbol id="paw" viewBox="0 0 24 24"><path d="M7 15c1-5 9-5 10 0 5 6-1 7-5 4-4 3-10 2-5-4Z"/><ellipse cx="5" cy="9" rx="2" ry="3"/><ellipse cx="10" cy="5" rx="2" ry="3"/><ellipse cx="16" cy="5" rx="2" ry="3"/><ellipse cx="21" cy="10" rx="2" ry="3"/></symbol><symbol id="book" viewBox="0 0 24 24"><rect x="5" y="3" width="15" height="18" rx="3"/><path d="M3 7h4M3 12h4M3 17h4M11 8h5M11 12h5M11 16h3"/></symbol><symbol id="database" viewBox="0 0 24 24"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v14c0 4 16 4 16 0V5M4 12c0 4 16 4 16 0"/></symbol><symbol id="search-icon" viewBox="0 0 24 24"><circle cx="10" cy="10" r="6.5"/><path d="m15 15 6 6"/></symbol><symbol id="plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol><symbol id="barra" viewBox="0 0 24 24"><path d="M5 6h14M5 12h14M5 18h14"/></symbol></svg>
 <aside class="sidebar" id="sidebar" aria-label="barra principal">
 <div class="brand"><img id="logo" src="assets/logo.png" alt="Logo do petshop"><div class="brand-fallback" id="logoFallback" hidden><svg class="icon"><use href="#paw"/></svg></div><div class="brand-text"><strong>Chicão</strong><small>Casa de ração</small></div></div>
-<nav class="nav"><button class="active" data-page="pedidos" aria-current="page" title="Pedidos"><svg class="icon"><use href="#book"/></svg><span>Pedidos</span></button><button data-page="agenda" title="Agenda"><svg class="icon"><use href="#book"/></svg><span>Agenda</span></button><button data-page="dados" title="Dados"><svg class="icon"><use href="#database"/></svg><span>Dados</span></button></nav>
+<nav class="nav"><button class="active" data-page="pedidos" aria-current="page" title="Pedidos"><svg class="icon"><use href="#book"/></svg><span>Pedidos</span></button><button data-page="agenda" title="Agenda"><svg class="icon"><use href="#book"/></svg><span>Agenda</span></button><button data-page="dados" title="Dados"><svg class="icon"><use href="#database"/></svg><span>Dados</span></button><button data-page="funcionarios" id="cloudStaffNav" title="Funcionários" hidden><svg class="icon"><use href="#book"/></svg><span>Funcionários</span></button></nav>
 <button class="barra-toggle" id="barraToggle" aria-label="Expandir ou recolher barra" aria-expanded="false"><svg class="icon"><use href="#barra"/></svg><span>Fixar barra</span></button>
 </aside>
+<div id="cloudSession" class="cloud-session" hidden><span id="cloudUserLabel"></span><button type="button" id="cloudLogout">Sair</button></div>
 <main>
 <div id="storageWarning" class="warning" role="alert" hidden></div>
 <section id="pedidos"><header class="order-heading"><div><h1>Pedidos</h1><p>Prepare o pedido e imprima a comanda.</p></div><span class="date" id="ord-today"></span></header><div class="workspace"><form id="ord-order-form"><section class="card"><div class="section-heading"><span class="step">01</span><h2>Dados do cliente</h2></div><div class="fields order-customer-grid"><label>Nome do cliente <span>*</span><input id="ord-client" class="order-customer-input" autocomplete="off" placeholder="Nome completo" maxlength="500" aria-controls="orderCustomers" required></label><label>Telefone<input id="ord-phone" class="order-customer-input" autocomplete="off" placeholder="+55 (11) 940028922" maxlength="500" aria-controls="orderCustomers" type="tel"></label><label>Rua<input id="ord-street" class="order-customer-input" autocomplete="off" placeholder="Rua das Flores" maxlength="500" aria-controls="orderCustomers"></label><label>Número<input id="ord-number" class="order-customer-input" autocomplete="off" placeholder="123" maxlength="500" aria-controls="orderCustomers"></label><label class="full">Complemento<input id="ord-extra" class="order-customer-input" autocomplete="off" placeholder="Casa 2 ou Apto 45" maxlength="500" aria-controls="orderCustomers"></label><div id="orderCustomers" class="customer-options full" hidden></div><p class="customer-help full">Pesquise em qualquer campo e selecione um cliente da Agenda para preencher os demais.</p></div></section>
@@ -37,19 +55,33 @@
 <aside><div class="preview-top"><h2>Comprovante</h2><span>80 mm</span></div><div class="paper-wrap"><article id="ord-receipt" class="receipt"><div class="receipt-client-name"><span>CLIENTE</span><strong id="ord-r-client">—</strong><div id="ord-r-phone" class="receipt-phone" hidden></div><div id="ord-r-address" class="receipt-address" hidden></div></div><div class="receipt-header"><h2>CHICÃO RAÇÕES</h2><p>PEDIDO</p></div><div id="ord-r-items"><p class="receipt-empty">Os produtos aparecerão aqui.</p></div><div class="receipt-total"><span>TOTAL A PAGAR</span><div class="amount-stamp"><strong id="ord-r-total">R$&nbsp;0,00</strong><div id="ord-paid-mark" hidden>PAGO</div></div></div><div id="ord-r-payment" class="receipt-payment"></div><p class="receipt-footer">Comprovante de pedido • Não fiscal</p><div class="signature"><span>Assinatura do cliente</span></div><p class="receipt-date" id="ord-receipt-date">27/10/2026, 17:08</p></article></div><button class="print-button" type="submit" form="ord-order-form"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M6 9V3h12v6M6 18H3V9h18v9h-3M6 14h12v7H6z"></path></svg> Imprimir pedido</button><button class="clear-button" id="ord-clear-form" type="button">Limpar dados preenchidos</button><p class="print-tip">Na impressão, selecione papel de 80 mm, escala 100% e desative cabeçalhos e rodapés.</p><p id="ord-message" role="status"></p></aside></div></section>
 <section id="agenda" hidden>
 <div class="eyebrow">Chicão Rações</div>
-<header class="top"><div><h1>Agenda de clientes</h1><p>Todos os seus contatos, no mesmo lugar.</p><div class="local"><i class="dot"></i>Armazenamento local neste navegador</div></div><button class="primary new" id="newClient"><svg class="icon"><use href="#plus"/></svg>Novo cliente</button></header>	
+<header class="top"><div><h1>Agenda de clientes</h1><p>Todos os seus contatos, no mesmo lugar.</p><div class="local"><i class="dot"></i><span id="cloudSyncStatus">Conectando ao Supabase…</span></div></div><button class="primary new" id="newClient"><svg class="icon"><use href="#plus"/></svg>Novo cliente</button></header>	
 <div class="search-panel"><div class="search-box"><svg class="icon"><use href="#search-icon"/></svg><input id="search" type="search" aria-label="Pesquisar clientes" placeholder="Busque por nome, telefone, endereço ou email…" autocomplete="off"><button class="clear-search" id="clearSearch" aria-label="Limpar pesquisa" hidden>×</button></div><p class="search-help">Combine informações para encontrar mais rápido. Ex.: <strong>ed 9685</strong>. Acentos não fazem diferença.</p></div>
 <div class="section-bar"><h2>Seus clientes <span class="count" id="count">0</span></h2><span class="sort-label" id="sortLabel">Nome · A a Z</span></div>
 <div class="table-wrap"><table><thead><tr><th scope="col" aria-sort="ascending">Nome <button class="sort-button" data-field="nome" aria-label="Ordenar por nome" aria-expanded="false" aria-controls="sortbarra">▽</button></th><th scope="col">Telefone <button class="sort-button" data-field="telefone" aria-label="Ordenar por telefone" aria-expanded="false" aria-controls="sortbarra">▽</button></th><th scope="col">Endereço <button class="sort-button" data-field="endereco" aria-label="Ordenar por endereço" aria-expanded="false" aria-controls="sortbarra">▽</button></th><th scope="col">Email <button class="sort-button" data-field="email" aria-label="Ordenar por email" aria-expanded="false" aria-controls="sortbarra">▽</button></th></tr></thead><tbody id="rows"></tbody></table><div class="empty" id="empty"><svg class="icon"><use href="#paw"/></svg><h3 id="emptyTitle">Agenda vazia</h3><p id="emptyText">Clique em “Novo cliente” para fazer seu primeiro cadastro.</p></div></div>
 <footer class="footer"><span id="results" aria-live="polite">0 clientes cadastrados</span><span>Clique no nome de um cliente para editar.</span></footer>
 </section>
-<section id="dados" hidden><div class="eyebrow">TUDO SOB SEU CONTROLE</div><header class="top"><div><h1>Dados</h1><p>Guarde uma cópia dos seus contatos e restaure quando precisar.</p></div></header><div class="data-panel"><div class="data-buttons"><button class="primary" id="exportData">Exportar dados</button><button id="importData">Importar dados</button><button class="danger" id="deleteData">Excluir dados</button></div><div class="data-note"><strong>Seus cadastros ficam neste navegador.</strong><p>Exporte backups regularmente. Limpar os dados do navegador pode apagar os cadastros.</p><p style="margin-top:12px">A importação substitui a agenda atual após sua confirmação.</p></div></div></section>
+<section id="dados" hidden><div class="eyebrow">TUDO SOB SEU CONTROLE</div><header class="top"><div><h1>Dados</h1><p>Guarde uma cópia dos seus contatos e restaure quando precisar.</p></div></header><div class="data-panel"><div class="data-buttons"><button id="cloudMigrate" type="button" hidden>Migrar clientes deste navegador</button><button class="primary" id="exportData">Exportar dados</button><button id="importData">Importar dados</button><button class="danger" id="deleteData">Excluir dados</button></div><div class="data-note"><strong>Agenda de clientes sincronizada pelo Supabase.</strong><p>Alterações de funcionários autorizados aparecem nos outros computadores conectados. Os rascunhos de Pedidos permanecem locais, neste navegador.</p><p style="margin-top:12px">Importar um JSON mescla os cadastros sem excluir clientes existentes. Faça backups antes de alterações em massa.</p></div></div></section>
+<section id="funcionarios" hidden>
+<div class="eyebrow">ADMINISTRAÇÃO</div><header class="top"><div><h1>Funcionários</h1><p>Autorize contas individuais para acessar os clientes e pedidos.</p></div></header>
+<div class="cloud-panel"><h2>Autorizar funcionário</h2><p>Cadastre o e-mail do funcionário. Depois ele pode criar a própria senha na tela de entrada e confirmar o e-mail.</p>
+<div class="cloud-inputs" style="margin-top:14px"><input id="cloudInviteName" placeholder="Nome do funcionário" maxlength="120" aria-label="Nome do funcionário"><input id="cloudInviteEmail" placeholder="E-mail de acesso" type="email" maxlength="254" aria-label="E-mail do funcionário"><button class="primary" id="cloudInviteSave" type="button">Autorizar e-mail</button></div>
+<div class="cloud-notice">O administrador pode bloquear um funcionário imediatamente. O cadastro de clientes continuará centralizado no banco de dados.</div>
+<h2>Equipe ativa e bloqueada</h2><div id="cloudStaffRows"></div><h2>Convites pendentes</h2><div id="cloudInviteRows"></div></div></section>
 </main>
 <div class="popup" id="sortbarra" hidden><button data-direction="asc">Filtrar de A a Z</button><button data-direction="desc">Filtrar de Z a A</button></div>
 <dialog id="clientDialog" aria-labelledby="dialogTitle"><form id="clientForm"><div class="dialog-head"><h2 id="dialogTitle">Novo cliente</h2><button type="button" class="close" id="closeDialog" aria-label="Fechar">×</button></div><p>Um bom atendimento começa por conhecer seu cliente.</p><div class="fields"><label>Nome *<input name="nome" required maxlength="180" autocomplete="name" placeholder="Nome completo"></label><div class="phone-row"><label>Telefone *<input name="telefone" type="tel" inputmode="numeric" required autocomplete="tel" placeholder="+55 (11) 940028922" aria-describedby="phoneError"><span id="phoneError" class="field-error" hidden>Informe um número de celular válido, com 9 a 14 dígitos.</span></label><label class="wa-choice" title="Contato possui WhatsApp"><input type="checkbox" name="whatsapp" aria-label="Contato possui WhatsApp"><svg class="wa-icon" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18a8 8 0 0 1-4.1-1.1l-.4-.2-2.6.7.7-2.5-.3-.4A8 8 0 1 1 12 20Z"/><path fill="currentColor" d="M8 7c-.5 0-1.5 1-1.5 2.2 0 2.8 4.5 7.2 7.6 7.2 1.4 0 2.5-1.1 2.5-1.9 0-.3-.1-.4-.4-.5l-2-1c-.3-.1-.5-.1-.7.2l-.8 1c-.2.2-.4.2-.7.1a7 7 0 0 1-3.5-3.1c-.2-.3-.1-.5.1-.7l.6-.8c.2-.2.2-.4.1-.7L8.5 7.3C8.4 7 8.2 7 8 7Z"/></svg></label></div><fieldset class="address-fields"><legend>Endereço</legend><div class="address-grid"><label>Rua<input name="rua" maxlength="500" autocomplete="address-line1" placeholder="Rua das Flores"></label><label>Número<input name="numero" maxlength="30" autocomplete="off" placeholder="123"></label><label>Complemento<input name="complemento" maxlength="150" autocomplete="address-line2" placeholder="Casa 2 ou Apto 45"></label><label>Bairro<input name="bairro" maxlength="150" autocomplete="off" placeholder="Centro"></label><label>Cidade<input name="cidade" maxlength="150" autocomplete="address-level2" placeholder="São Paulo"></label><label>Estado / UF<input name="estado" maxlength="60" autocomplete="address-level1" placeholder="SP"></label><label>CEP<input name="cep" maxlength="9" autocomplete="postal-code" inputmode="numeric" placeholder="01234-567"></label></div></fieldset><label>Email<input name="email" type="email" maxlength="254" autocomplete="email" placeholder="cliente@exemplo.com"></label></div><div class="dialog-actions"><button type="button" id="deleteClient" class="danger delete-one" hidden>Excluir</button><button type="button" id="cancelDialog">Cancelar</button><button type="submit" class="primary">Salvar cliente</button></div></form></dialog>
 <dialog id="dataConfirmDialog" aria-labelledby="dataConfirmTitle"><form method="dialog"><h2 id="dataConfirmTitle">Confirmar ação</h2><p id="dataConfirmMessage" style="margin-top:14px;white-space:pre-wrap"></p><div class="dialog-actions"><button value="cancel" autofocus>Cancelar</button><button id="dataConfirmAccept" value="confirm" class="danger">Confirmar</button></div></form></dialog>
 <input type="file" id="importFile" accept=".json,application/json" hidden>
 <div class="toast" id="toast" role="status" hidden></div>
+<div id="cloudAuth" class="cloud-auth"><div class="cloud-auth-card">
+<h1>Chicão Rações</h1><p>Acesso de funcionários à Agenda e aos Pedidos.</p>
+<form id="cloudLoginForm"><label>E-mail<input id="cloudLoginEmail" type="email" required autocomplete="email" placeholder="email@exemplo.com"></label>
+<label>Senha<input id="cloudLoginPassword" type="password" required autocomplete="current-password" minlength="6"></label>
+<button type="submit" class="primary">Entrar no sistema</button></form>
+<div class="cloud-auth-actions"><button id="cloudRegister" type="button">Criar minha senha</button><button id="cloudRecover" type="button">Esqueci minha senha</button></div>
+<p id="cloudLoginMessage" role="status"></p></div></div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.57.0/dist/umd/supabase.min.js"></script>
 <script>
 'use strict';
 const KEY='petshop_clientes_v1',APP='petshop-agenda',VERSION=2;
@@ -98,10 +130,8 @@ function envelope(records){return {app:APP,schemaVersion:VERSION,exportedAt:new 
 function notify(message){clearTimeout(toastTimer);$('toast').textContent=message;$('toast').hidden=false;toastTimer=setTimeout(()=>$('toast').hidden=true,6000);}
 function warn(message){$('storageWarning').textContent=message;$('storageWarning').hidden=false;}
 function load(){try{lastRaw=localStorage.getItem(KEY);clients=lastRaw?decode(JSON.parse(lastRaw)).records:[];storageReady=true;$('storageWarning').hidden=true;}catch(error){storageReady=false;warn('Não foi possível ler os dados locais. Nada foi sobrescrito. Exporte uma cópia para recuperação ou importe um backup válido.');}}
-function commit(next,{remove=false,recover=false}={}){
-if(!storageReady&&!recover){notify('Armazenamento indisponível. Importe um backup válido ou exclua os dados locais para recomeçar.');return false;}
-try{if(localStorage.getItem(KEY)!==lastRaw){notify('A agenda mudou em outra aba. Recarregue a página antes de salvar.');return false;}const raw=remove?null:JSON.stringify(envelope(next));if(remove)localStorage.removeItem(KEY);else localStorage.setItem(KEY,raw);lastRaw=raw;clients=next;storageReady=true;$('storageWarning').hidden=true;render();return true;}catch(error){notify('Não foi possível salvar. Verifique o espaço e a permissão de armazenamento do navegador.');return false;}
-}
+async function commit(next){return cloudCommit(next);}
+
 function render(){
 const query=$('search').value;const shown=clients.filter(c=>matches(c,query)).sort((a,b)=>{const compare=a[sortField].localeCompare(b[sortField],'pt-BR',{sensitivity:'base',numeric:true});return (direction==='asc'?1:-1)*compare||a.nome.localeCompare(b.nome,'pt-BR',{sensitivity:'base'});});
 $('rows').replaceChildren();const fragment=document.createDocumentFragment();
@@ -139,18 +169,18 @@ for(const button of document.querySelectorAll('.sort-button'))button.onclick=()=
 for(const button of document.querySelectorAll('[data-direction]'))button.onclick=()=>{sortField=activeSort.dataset.field;direction=button.dataset.direction;closeSort(true);render();};
 document.addEventListener('click',e=>{if(!e.target.closest('.sort-button')&&!e.target.closest('#sortbarra'))closeSort();});document.addEventListener('keydown',e=>{if(e.key==='Escape')closeSort(true);});window.addEventListener('resize',()=>closeSort());document.addEventListener('scroll',()=>closeSort(),true);
 for(const id of ['cancelDialog','closeDialog'])$(id).onclick=()=>$('clientDialog').close();
-$('clientForm').onsubmit=e=>{e.preventDefault();const values={id:editingId??uid()};for(const field of ['nome','telefone','email'])values[field]=$('clientForm').elements[field].value.trim();if(!validatePhone()){$('clientForm').elements.telefone.reportValidity();return;}values.telefone=formatPhone(values.telefone);values.whatsapp=$('clientForm').elements.whatsapp.checked;values.enderecoDetalhado={};for(const field of ADDRESS_FIELDS)values.enderecoDetalhado[field]=$('clientForm').elements[field].value.trim();values.endereco=addressText(values.enderecoDetalhado);if(!values.nome){$('clientForm').elements.nome.focus();notify('Informe o nome do cliente.');return;}if(editingId&&!clients.some(c=>c.id===editingId)){notify('Este cadastro não existe mais. Feche e abra novamente.');return;}const next=editingId?clients.map(c=>c.id===editingId?values:c):[...clients,values];if(commit(next)){$('clientDialog').close();notify('Cliente salvo com sucesso.');}};
-$('deleteClient').onclick=()=>{if(confirm('Excluir este cliente? Esta ação não pode ser desfeita.')&&commit(clients.filter(c=>c.id!==editingId))){$('clientDialog').close();notify('Cliente excluído.');}};
+$('clientForm').onsubmit=async e=>{e.preventDefault();const values={id:editingId??uid()};for(const field of ['nome','telefone','email'])values[field]=$('clientForm').elements[field].value.trim();if(!validatePhone()){$('clientForm').elements.telefone.reportValidity();return;}values.telefone=formatPhone(values.telefone);values.whatsapp=$('clientForm').elements.whatsapp.checked;values.enderecoDetalhado={};for(const field of ADDRESS_FIELDS)values.enderecoDetalhado[field]=$('clientForm').elements[field].value.trim();values.endereco=addressText(values.enderecoDetalhado);if(!values.nome){$('clientForm').elements.nome.focus();notify('Informe o nome do cliente.');return;}if(editingId&&!clients.some(c=>c.id===editingId)){notify('Este cadastro não existe mais. Feche e abra novamente.');return;}const next=editingId?clients.map(c=>c.id===editingId?values:c):[...clients,values];if(await commit(next)){$('clientDialog').close();notify('Cliente salvo com sucesso.');}};
+$('deleteClient').onclick=async()=>{if(confirm('Excluir este cliente? Esta ação não pode ser desfeita.')&&await commit(clients.filter(c=>c.id!==editingId))){$('clientDialog').close();notify('Cliente excluído.');}};
 function download(text,name){const url=URL.createObjectURL(new Blob([text],{type:'application/json;charset=utf-8'}));const a=document.createElement('a');a.href=url;a.download=name;document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);}
 
 function confirmDataAction(title,message,action){return new Promise(resolve=>{const dialog=$('dataConfirmDialog');$('dataConfirmTitle').textContent=title;$('dataConfirmMessage').textContent=message;$('dataConfirmAccept').textContent=action;dialog.returnValue='cancel';dialog.addEventListener('close',()=>resolve(dialog.returnValue==='confirm'),{once:true});dialog.showModal();});}
 
-$('exportData').onclick=()=>{if(!storageReady){if(lastRaw!==null){download(lastRaw,'petshop-recuperacao.json');notify('Cópia original exportada para recuperação.');}else notify('Não foi possível acessar os dados locais.');return;}download(JSON.stringify(envelope(clients),null,2),'petshop-backup-'+new Date().toISOString().slice(0,10)+'.json');notify('Backup exportado.');};
+$('exportData').onclick=()=>{if(!cloudValid()){notify('Faça login para exportar a Agenda.');return;}if(!storageReady){notify('Os cadastros antigos neste navegador não puderam ser lidos. A exportação abaixo contém a Agenda do Supabase.');}download(JSON.stringify(envelope(clients),null,2),'petshop-backup-'+new Date().toISOString().slice(0,10)+'.json');notify('Backup exportado.');};
 $('importData').onclick=()=>$('importFile').click();
-$('importFile').onchange=async e=>{const file=e.target.files[0];e.target.value='';if(!file)return;try{if(file.size>20*1024*1024)throw Error('O arquivo excede o limite de 20 MB.');const result=decode(JSON.parse((await file.text()).replace(/^\uFEFF/,'')));const future=result.version>VERSION?' Este backup é de uma versão mais nova. Somente os campos reconhecidos por esta versão serão aproveitados.':'';if(!await confirmDataAction('Importar dados','Importar '+result.records.length+' cliente(s) e substituir os '+clients.length+' cadastro(s) atuais? Exporte um backup antes se quiser preservá-los.'+future,'Importar e substituir'))return;if(commit(result.records,{recover:true}))notify('Backup importado com sucesso.');}catch(error){notify(error instanceof SyntaxError?'Arquivo JSON inválido. Nenhum dado foi alterado.':error.message);}};
-$('deleteData').onclick=async()=>{try{if(!await confirmDataAction('Excluir dados','Excluir os '+clients.length+' cadastro(s) de clientes deste navegador? Esta ação não pode ser desfeita. Exporte um backup antes se quiser preservar os dados.','Excluir dados'))return;if(commit([],{remove:true,recover:true})){$('search').value='';render();notify('Dados do petshop excluídos deste navegador.');}}catch(error){notify('Não foi possível excluir os dados. '+error.message);}};
-window.addEventListener('storage',e=>{if(e.key===KEY||e.key===null){load();render();notify('A agenda foi atualizada em outra aba.');}});
-load();render();
+$('importFile').onchange=async e=>{const file=e.target.files[0];e.target.value='';if(!file)return;try{if(file.size>20*1024*1024)throw Error('O arquivo excede o limite de 20 MB.');const result=decode(JSON.parse((await file.text()).replace(/^\uFEFF/,'')));const future=result.version>VERSION?' Este backup é de uma versão mais nova. Somente os campos reconhecidos por esta versão serão aproveitados.':'';if(!await confirmDataAction('Importar dados','Importar '+result.records.length+' cliente(s) e mesclar com os '+clients.length+' cadastro(s) remotos, sem excluir outros clientes? Registros com o mesmo ID serão atualizados. Exporte um backup antes.'+future,'Importar e substituir'))return;if(await cloudMerge(result.records))notify('Backup importado com sucesso.');}catch(error){notify(error instanceof SyntaxError?'Arquivo JSON inválido. Nenhum dado foi alterado.':error.message);}};
+$('deleteData').onclick=async()=>{try{if(!await confirmDataAction('Excluir dados','Excluir os '+clients.length+' cadastro(s) da Agenda compartilhada de todos os funcionários? Esta ação não pode ser desfeita. Exporte um backup antes se quiser preservar os dados.','Excluir dados'))return;if(await cloudDeleteAll()){$('search').value='';render();notify('Clientes removidos da Agenda compartilhada.');}}catch(error){notify('Não foi possível excluir os dados. '+error.message);}};
+window.addEventListener('storage',e=>{if(e.key===KEY)notify('Há uma alteração nos dados locais antigos. Use a opção de migração em Dados.');});
+load();clients=[];render();$('storageWarning').hidden=true;
 </script>
 <script>
 (()=>{
@@ -249,6 +279,188 @@ productInputs.addEventListener('input',event=>{const input=event.target;if(!inpu
 
 draftReady=restoreOrderDraft();
 })();
+</script>
+<script>
+'use strict';
+const CLOUD_URL='https://hwmdqbzoffsqhcymwrgh.supabase.co';
+const CLOUD_PUBLIC_KEY='sb_publishable_kqvKrBLi8GDXiGaQVaxvBg_LEkCLEFJ';
+const cloud=window.supabase?.createClient(CLOUD_URL,CLOUD_PUBLIC_KEY,{auth:{autoRefreshToken:true,persistSession:true,detectSessionInUrl:true}});
+let cloudProfile=null,cloudChannel=null,cloudLoading=false,cloudReloadLater=false,cloudMutation=false,cloudResetMode=false;
+const cloudVersions=new Map();
+const cloudAdmin=()=>cloudProfile?.ativo===true&&cloudProfile?.papel==='admin';
+const cloudValid=()=>cloudProfile?.ativo===true;
+const cloudStatus=message=>$('cloudSyncStatus').textContent=message;
+const cloudAuthMessage=message=>$('cloudLoginMessage').textContent=message;
+const cloudError=message=>notify(message||'Não foi possível realizar a operação.');
+function cloudRow(c){return {id:c.id,dados:c};}
+async function cloudReadAll(){
+ const records=[],versions=new Map();let from=0;
+ for(;;){
+  const {data,error}=await cloud.from('chiquinho_clientes').select('id,dados,alterado_em').order('id').range(from,from+499);
+  if(error)throw error;
+  for(const row of data){records.push({...row.dados,id:row.id});versions.set(row.id,row.alterado_em);}
+  if(data.length<500)break;from+=500;
+ }
+ return {records,versions};
+}
+async function cloudRefresh(){
+ if(!cloudValid())return;
+ if(cloudLoading||cloudMutation){cloudReloadLater=true;return;}
+ cloudLoading=true;cloudStatus('Sincronizando…');
+ try{
+  const {records,versions}=await cloudReadAll();
+  clients=records;cloudVersions.clear();for(const [k,v] of versions)cloudVersions.set(k,v);
+  render();cloudStatus('Agenda sincronizada · '+clients.length+' clientes');
+ }catch(error){cloudStatus('Sem conexão — tente atualizar');cloudError('Falha ao sincronizar: '+error.message);}
+ finally{cloudLoading=false;if(cloudReloadLater&&!cloudMutation){cloudReloadLater=false;cloudRefresh();}}
+}
+async function cloudCommit(next){
+ if(!cloudValid()){cloudError('Entre com uma conta ativa para alterar a Agenda.');return false;}
+ if(cloudMutation){cloudError('Aguarde a gravação anterior.');return false;}
+ const before=new Map(clients.map(c=>[c.id,c]));const after=new Map(next.map(c=>[c.id,c]));
+ const inserted=[...after.values()].filter(c=>!before.has(c.id));
+ const deleted=[...before.values()].filter(c=>!after.has(c.id));
+ const edited=[...after.values()].filter(c=>before.has(c.id)&&JSON.stringify(c)!==JSON.stringify(before.get(c.id)));
+ if(inserted.length+deleted.length+edited.length!==1){cloudError('Altere somente um cadastro de cada vez.');return false;}
+ cloudMutation=true;
+ try{
+  let result;
+  if(inserted.length){const c=inserted[0];result=await cloud.from('chiquinho_clientes').insert(cloudRow(c));}
+  else if(edited.length){const c=edited[0];result=await cloud.from('chiquinho_clientes').update({dados:c,alterado_em:new Date().toISOString()}).eq('id',c.id).eq('alterado_em',cloudVersions.get(c.id)??'').select('id');if(!result.error&&!result.data?.length)throw Error('Cadastro modificado em outro computador. Atualize a Agenda.');}
+  else {const c=deleted[0];result=await cloud.from('chiquinho_clientes').delete().eq('id',c.id).eq('alterado_em',cloudVersions.get(c.id)??'').select('id');if(!result.error&&!result.data?.length)throw Error('Cadastro alterado ou excluído em outro computador.');}
+  if(result.error)throw result.error;
+  return true;
+ }catch(error){cloudError('Não foi possível salvar: '+error.message);return false;}
+ finally{cloudMutation=false;cloudReloadLater=false;await cloudRefresh();}
+}
+async function cloudMerge(records,{ignoreDuplicates=false}={}){
+ if(!cloudAdmin()){cloudError('Somente o administrador pode importar cadastros.');return false;}
+ if(cloudMutation)return false;
+ cloudMutation=true;
+ try{
+  let list=records;
+  if(ignoreDuplicates){
+   const remote=await cloudReadAll();const ids=new Set(remote.records.map(c=>c.id));
+   const signatures=new Set(remote.records.map(c=>normalize(c.nome)+'|'+digits(c.telefone)));
+   list=records.filter(c=>!ids.has(c.id)&&!signatures.has(normalize(c.nome)+'|'+digits(c.telefone)));
+  }
+  for(let i=0;i<list.length;i+=100){const {error}=await cloud.from('chiquinho_clientes').upsert(list.slice(i,i+100).map(cloudRow),{onConflict:'id',ignoreDuplicates});if(error)throw error;}
+  notify(list.length+' cadastro(s) importado(s).');return true;
+ }catch(error){cloudError('Importação interrompida; alguns registros podem ter sido gravados: '+error.message);return false;}
+ finally{cloudMutation=false;cloudReloadLater=false;await cloudRefresh();}
+}
+async function cloudDeleteAll(){
+ if(!cloudAdmin()){cloudError('Somente administradores podem excluir toda a Agenda.');return false;}
+ if(cloudMutation)return false;
+ cloudMutation=true;
+ try{
+  const {error}=await cloud.from('chiquinho_clientes').delete().neq('id','');
+  if(error)throw error;return true;
+ }catch(error){cloudError('Exclusão não concluída: '+error.message);return false;}
+ finally{cloudMutation=false;cloudReloadLater=false;await cloudRefresh();}
+}
+async function cloudMigrate(){
+ if(!cloudAdmin())return;
+ try{
+  const raw=localStorage.getItem(KEY);if(!raw){notify('Não há cadastros antigos neste navegador.');return;}
+  const records=decode(JSON.parse(raw)).records;
+  if(!records.length){notify('A Agenda antiga está vazia.');return;}
+  if(!await confirmDataAction('Migrar Agenda antiga','Enviar '+records.length+' cadastro(s) antigos ao Supabase, sem apagar os originais nem substituir clientes existentes? Registros já presentes serão ignorados.','Migrar cadastros'))return;
+  await cloudMerge(records,{ignoreDuplicates:true});
+ }catch(error){cloudError('Os dados locais foram preservados. Não foi possível migrar: '+error.message);}
+}
+async function cloudStaffRefresh(){
+ if(!cloudAdmin())return;
+ const [members,pending]=await Promise.all([
+  cloud.from('chiquinho_funcionarios').select('id,email,nome,papel,ativo').order('email'),
+  cloud.from('chiquinho_convites').select('email,nome').order('email')
+ ]);
+ if(members.error||pending.error){cloudError('Erro ao carregar funcionários: '+(members.error||pending.error).message);return;}
+ const area=$('cloudStaffRows');area.replaceChildren();
+ for(const person of members.data){
+  const row=document.createElement('div');row.className='cloud-line';
+  const name=document.createElement('span');name.textContent=(person.nome||'Sem nome')+' · '+person.email+' · '+(person.papel==='admin'?'Administrador':'Funcionário')+' · '+(person.ativo?'Ativo':'Bloqueado');row.append(name);
+  if(person.email.toLowerCase()!=='henrique.brasil.fernandes@gmail.com'){
+   const btn=document.createElement('button');btn.textContent=person.ativo?'Bloquear':'Reativar';
+   btn.onclick=async()=>{if(!await confirmDataAction('Alterar acesso','Deseja '+(person.ativo?'bloquear':'reativar')+' o acesso de '+person.email+'?','Confirmar'))return;const {error}=await cloud.from('chiquinho_funcionarios').update({ativo:!person.ativo}).eq('id',person.id);if(error)cloudError(error.message);else cloudStaffRefresh();};row.append(btn);
+  }area.append(row);
+ }
+ const invites=$('cloudInviteRows');invites.replaceChildren();
+ for(const invite of pending.data){
+  const row=document.createElement('div');row.className='cloud-line';const name=document.createElement('span');name.textContent=invite.nome+' · '+invite.email;
+  const btn=document.createElement('button');btn.textContent='Cancelar';btn.onclick=async()=>{const {error}=await cloud.from('chiquinho_convites').delete().eq('email',invite.email);if(error)cloudError(error.message);else cloudStaffRefresh();};
+  row.append(name,btn);invites.append(row);
+ }
+}
+$('cloudInviteSave').onclick=async()=>{
+ if(!cloudAdmin())return;
+ const nome=$('cloudInviteName').value.trim(),email=$('cloudInviteEmail').value.trim().toLowerCase();
+ if(!nome||!email||!$('cloudInviteEmail').checkValidity()){notify('Informe nome e e-mail válidos.');return;}
+ const {error}=await cloud.from('chiquinho_convites').insert({nome,email});
+ if(error){cloudError('Não foi possível autorizar: '+error.message);return;}
+ $('cloudInviteName').value='';$('cloudInviteEmail').value='';notify('E-mail autorizado. O funcionário já pode criar sua senha e confirmar o e-mail.');cloudStaffRefresh();
+};
+function cloudLock(message=''){
+ cloudProfile=null;clients=[];cloudVersions.clear();render();
+ $('cloudAuth').hidden=false;document.body.classList.add('cloud-locked');$('cloudSession').hidden=true;
+ $('cloudStaffNav').hidden=true;$('cloudMigrate').hidden=true;
+ $('importData').hidden=true;$('deleteData').hidden=true;
+ if(cloudChannel){cloud.removeChannel(cloudChannel);cloudChannel=null;}
+ if(message)cloudAuthMessage(message);
+}
+async function cloudActivate(user){
+ if(!user){cloudLock();return;}
+ const {data,error}=await cloud.from('chiquinho_funcionarios').select('id,email,nome,papel,ativo').eq('id',user.id).maybeSingle();
+ if(error||!data?.ativo){cloudLock('Esta conta ainda não está autorizada ou foi bloqueada. Solicite acesso ao administrador.');return;}
+ cloudProfile=data;$('cloudAuth').hidden=true;document.body.classList.remove('cloud-locked');
+ $('cloudSession').hidden=false;$('cloudUserLabel').textContent=data.nome||user.email;
+ $('cloudStaffNav').hidden=!cloudAdmin();$('cloudMigrate').hidden=!cloudAdmin();
+ $('importData').hidden=!cloudAdmin();$('deleteData').hidden=!cloudAdmin();
+ if(!cloudChannel){
+  cloudChannel=cloud.channel('chiquinho-clientes-v327').on('postgres_changes',{schema:'public',table:'chiquinho_clientes',event:'*'},()=>cloudRefresh()).subscribe(status=>{
+   if(status==='SUBSCRIBED')cloudRefresh();
+   if(status==='CHANNEL_ERROR'||status==='TIMED_OUT')cloudStatus('Conexão instável. Atualizando quando reconectar.');
+  });
+ }
+ await cloudRefresh();if(cloudAdmin())cloudStaffRefresh();
+}
+$('cloudLoginForm').onsubmit=async event=>{
+ event.preventDefault();if(!cloud){cloudAuthMessage('Biblioteca Supabase indisponível. Verifique a conexão com a internet.');return;}
+ const email=$('cloudLoginEmail').value.trim(),password=$('cloudLoginPassword').value;
+ if(cloudResetMode){const {error}=await cloud.auth.updateUser({password});cloudAuthMessage(error?error.message:'Senha alterada. Faça login novamente.');if(!error){cloudResetMode=false;await cloud.auth.signOut();}return;}
+ cloudAuthMessage('Entrando…');const {data,error}=await cloud.auth.signInWithPassword({email,password});
+ if(error){cloudAuthMessage(error.message);return;}
+ await cloudActivate(data.user);
+};
+$('cloudRegister').onclick=async()=>{
+ if(!cloud){cloudAuthMessage('Conexão indisponível.');return;}
+ const email=$('cloudLoginEmail').value.trim(),password=$('cloudLoginPassword').value;
+ if(!email||password.length<6){cloudAuthMessage('Digite o e-mail autorizado e uma senha de pelo menos 6 caracteres.');return;}
+ const redirect=location.protocol==='https:'||location.protocol==='http:'?{emailRedirectTo:location.origin+location.pathname}:{};
+ const {error}=await cloud.auth.signUp({email,password,options:redirect});
+ cloudAuthMessage(error?error.message:'Se o e-mail estiver autorizado, confirme o cadastro pelo link recebido. Depois faça login.');
+};
+$('cloudRecover').onclick=async()=>{
+ if(!cloud)return;
+ const email=$('cloudLoginEmail').value.trim();if(!email){cloudAuthMessage('Informe o seu e-mail.');return;}
+ const options=location.protocol==='https:'||location.protocol==='http:'?{redirectTo:location.origin+location.pathname}:{};
+ const {error}=await cloud.auth.resetPasswordForEmail(email,options);
+ cloudAuthMessage(error?error.message:'Se existir uma conta, você receberá orientações de recuperação por e-mail.');
+};
+$('cloudLogout').onclick=async()=>{await cloud.auth.signOut();cloudLock('Sessão encerrada.');};
+$('cloudMigrate').onclick=cloudMigrate;
+if(!cloud){cloudLock('Não foi possível carregar o Supabase. Conecte-se à internet e atualize a página.');}
+else{
+ cloud.auth.onAuthStateChange((event,session)=>{
+  if(event==='SIGNED_OUT')cloudLock();
+  if(event==='PASSWORD_RECOVERY'){cloudResetMode=true;cloudLock('Digite uma nova senha e clique em Entrar no sistema para atualizá-la.');}
+ });
+ cloud.auth.getUser().then(({data,error})=>{
+  if(!error&&data?.user)cloudActivate(data.user);
+  else cloudLock('Entre com sua conta individual.');
+ }).catch(error=>cloudLock('Falha ao verificar sua sessão: '+error.message));
+ document.addEventListener('visibilitychange',()=>{if(!document.hidden&&cloudValid()){cloud.auth.getUser().then(({data})=>data?.user?cloudActivate(data.user):cloudLock());}});
+}
 </script>
 </body>
 </html>
