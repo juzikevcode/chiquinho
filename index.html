@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#ff9900">
-<title>Chicão · Pedidos e clientes · v3.2.7</title>
+<title>Chicão · Pedidos e clientes · v3.2.8</title>
 <link rel="icon" href="assets/favicon.ico" sizes="any">
 <style>
 :root{--sidebar-expanded-width:230px;--hover-close-gap:14px;--orange:#ff9900;--blue:#62abd9;--ink:#27333d;--muted:#6d7880;--line:#e9edf0;--soft:#fff7eb;--danger:#b93939}*{box-sizing:border-box}body{margin:0;background:#fff;color:var(--ink);font:15px/1.5 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}button,input{font:inherit}button{cursor:pointer}button:disabled{cursor:not-allowed;opacity:.5}button,input{outline-offset:4px}button:focus-visible,input:focus-visible{outline:3px solid var(--blue)}button{border:1px solid var(--line);border-radius:11px;background:white;color:var(--ink);padding:10px 17px;font-weight:600;transition:background .15s}button:hover{background:#f5f7f9}.primary{background:var(--orange);border-color:var(--orange);color:#392500}.primary:hover{background:#ef9000}.danger{color:var(--danger);border-color:#eed3d3}.icon{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}.sidebar{position:fixed;inset:0 auto 0 0;width:64px;border-right:1px solid var(--line);background:#62abd9;z-index:20;display:flex;flex-direction:column;padding:20px 12px 20px 8px;overflow:hidden;transition:width .22s,box-shadow .22s}.sidebar.hovered,.sidebar:focus-within,.sidebar.open{width:var(--sidebar-expanded-width);box-shadow:12px 0 35px #27333d0b}.brand{display:flex;align-items:center;gap:14px;height:72px;white-space:nowrap;margin-bottom:28px}.brand img,.brand-fallback{width:50px;height:50px;flex-shrink:0;object-fit:contain;border-radius:14px;background:#286f97;padding:5px}.brand-fallback{display:grid;place-items:center;background:#286f97;color:#fff}.brand-fallback .icon{width:30px;height:30px}.brand strong{font-size:20px}.brand small{display:block;font-size:11px;letter-spacing:1.3px;color:var(--muted);font-weight:500}.nav{display:grid;gap:9px}.nav button,.barra-toggle{border:0;display:flex;align-items:center;gap:18px;width:210px;padding:14px;white-space:nowrap;background:transparent}.nav button.active{background:#286f97;color:#fff}.nav button.active:before{content:"";position:absolute;left:0;width:3px;height:26px;border-radius:0 3px 3px 0;background:var(--orange)}.nav button span,.brand-text,.sidebar-foot{opacity:0;transition:opacity .15s}.sidebar.hovered span,.sidebar:focus-within span,.sidebar.open span,.sidebar.hovered .brand-text,.sidebar:focus-within .brand-text,.sidebar.open .brand-text,.sidebar.hovered .sidebar-foot,.sidebar:focus-within .sidebar-foot,.sidebar.open .sidebar-foot{opacity:1}.sidebar-foot{margin-top:auto;white-space:nowrap;padding:14px;font-size:12px;color:#27333d}.barra-toggle{margin-top:18px;color:#27333d}main{margin-left:64px;max-width:1550px;padding:42px 50px 28px;transition:margin-left .22s}
@@ -37,6 +37,11 @@ body.cloud-locked > .sidebar,body.cloud-locked > main{visibility:hidden}
 .cloud-line span{overflow-wrap:anywhere}.cloud-line button{padding:7px 12px}
 .cloud-notice{background:#eef6fb;border:1px solid #dce7ed;border-radius:10px;padding:13px;font-size:13px;margin-top:12px}
 @media print{.cloud-auth,.cloud-session{display:none!important}}
+
+/* Recuperação de senha — v3.2.8 */
+.cloud-auth-card #cloudRecoveryForm h2{font-size:20px;margin:18px 0 8px}
+.cloud-auth-card #cloudRecoveryForm .primary{margin-top:10px}
+.cloud-auth-card #cloudRecoveryForm p{font-size:13px;margin:8px 0 14px}
 </style>
 </head>
 <body class="cloud-locked">
@@ -80,6 +85,13 @@ body.cloud-locked > .sidebar,body.cloud-locked > main{visibility:hidden}
 <label>Senha<input id="cloudLoginPassword" type="password" required autocomplete="current-password" minlength="6"></label>
 <button type="submit" class="primary">Entrar no sistema</button></form>
 <div class="cloud-auth-actions"><button id="cloudRegister" type="button">Criar minha senha</button><button id="cloudRecover" type="button">Esqueci minha senha</button></div>
+<form id="cloudRecoveryForm" hidden>
+<h2>Definir nova senha</h2>
+<p>O link de recuperação foi validado. Escolha uma nova senha para sua conta.</p>
+<label>Nova senha<input id="cloudNewPassword" type="password" minlength="8" required autocomplete="new-password" placeholder="No mínimo 8 caracteres"></label>
+<label>Confirmar nova senha<input id="cloudConfirmPassword" type="password" minlength="8" required autocomplete="new-password" placeholder="Digite a senha novamente"></label>
+<button type="submit" class="primary">Salvar nova senha</button>
+</form>
 <p id="cloudLoginMessage" role="status"></p></div></div>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.57.0/dist/umd/supabase.min.js"></script>
 <script>
@@ -284,6 +296,8 @@ draftReady=restoreOrderDraft();
 'use strict';
 const CLOUD_URL='https://hwmdqbzoffsqhcymwrgh.supabase.co';
 const CLOUD_PUBLIC_KEY='sb_publishable_kqvKrBLi8GDXiGaQVaxvBg_LEkCLEFJ';
+const cloudRecoveryLink=new URLSearchParams(location.hash.slice(1)).get('type')==='recovery'
+  ||new URLSearchParams(location.search).get('type')==='recovery';
 const cloud=window.supabase?.createClient(CLOUD_URL,CLOUD_PUBLIC_KEY,{auth:{autoRefreshToken:true,persistSession:true,detectSessionInUrl:true}});
 let cloudProfile=null,cloudChannel=null,cloudLoading=false,cloudReloadLater=false,cloudMutation=false,cloudResetMode=false;
 const cloudVersions=new Map();
@@ -408,6 +422,39 @@ function cloudLock(message=''){
  if(cloudChannel){cloud.removeChannel(cloudChannel);cloudChannel=null;}
  if(message)cloudAuthMessage(message);
 }
+function cloudEnterRecovery(){
+ cloudResetMode=true;
+ cloudLock();
+ $('cloudLoginForm').hidden=true;
+ $('cloudRegister').parentElement.hidden=true;
+ $('cloudRecoveryForm').hidden=false;
+ cloudAuthMessage('Informe e confirme sua nova senha. Depois clique em Salvar nova senha.');
+ $('cloudNewPassword').focus();
+}
+function cloudExitRecovery(){
+ cloudResetMode=false;
+ $('cloudRecoveryForm').hidden=true;
+ $('cloudLoginForm').hidden=false;
+ $('cloudRegister').parentElement.hidden=false;
+ $('cloudRecoveryForm').reset();
+}
+$('cloudRecoveryForm').onsubmit=async event=>{
+ event.preventDefault();
+ if(!cloud||!cloudResetMode){cloudAuthMessage('Seu link não está válido. Solicite outro e-mail de recuperação.');return;}
+ const password=$('cloudNewPassword').value;
+ if(password.length<8){cloudAuthMessage('A nova senha precisa ter pelo menos 8 caracteres.');return;}
+ if(password!==$('cloudConfirmPassword').value){cloudAuthMessage('As duas senhas não coincidem.');return;}
+ const submit=$('cloudRecoveryForm').querySelector('button[type="submit"]');
+ submit.disabled=true;cloudAuthMessage('Salvando nova senha…');
+ try{
+  const {error}=await cloud.auth.updateUser({password});
+  if(error)throw error;
+  cloudExitRecovery();
+  await cloud.auth.signOut();
+  cloudLock('Senha alterada com sucesso! Entre com seu e-mail e a nova senha.');
+ }catch(error){cloudAuthMessage('Não foi possível alterar a senha: '+error.message);}
+ finally{submit.disabled=false;}
+};
 async function cloudActivate(user){
  if(!user){cloudLock();return;}
  const {data,error}=await cloud.from('chiquinho_funcionarios').select('id,email,nome,papel,ativo').eq('id',user.id).maybeSingle();
@@ -427,7 +474,6 @@ async function cloudActivate(user){
 $('cloudLoginForm').onsubmit=async event=>{
  event.preventDefault();if(!cloud){cloudAuthMessage('Biblioteca Supabase indisponível. Verifique a conexão com a internet.');return;}
  const email=$('cloudLoginEmail').value.trim(),password=$('cloudLoginPassword').value;
- if(cloudResetMode){const {error}=await cloud.auth.updateUser({password});cloudAuthMessage(error?error.message:'Senha alterada. Faça login novamente.');if(!error){cloudResetMode=false;await cloud.auth.signOut();}return;}
  cloudAuthMessage('Entrando…');const {data,error}=await cloud.auth.signInWithPassword({email,password});
  if(error){cloudAuthMessage(error.message);return;}
  await cloudActivate(data.user);
@@ -452,12 +498,14 @@ $('cloudMigrate').onclick=cloudMigrate;
 if(!cloud){cloudLock('Não foi possível carregar o Supabase. Conecte-se à internet e atualize a página.');}
 else{
  cloud.auth.onAuthStateChange((event,session)=>{
-  if(event==='SIGNED_OUT')cloudLock();
-  if(event==='PASSWORD_RECOVERY'){cloudResetMode=true;cloudLock('Digite uma nova senha e clique em Entrar no sistema para atualizá-la.');}
+  if(event==='SIGNED_OUT'){if(cloudResetMode)cloudExitRecovery();cloudLock();}
+  if(event==='PASSWORD_RECOVERY')cloudEnterRecovery();
  });
  cloud.auth.getUser().then(({data,error})=>{
-  if(!error&&data?.user)cloudActivate(data.user);
-  else cloudLock('Entre com sua conta individual.');
+  if(!error&&data?.user){
+   if(cloudRecoveryLink||cloudResetMode)cloudEnterRecovery();
+   else cloudActivate(data.user);
+  }else cloudLock(cloudRecoveryLink?'O link de recuperação não pôde ser validado. Solicite um novo e-mail.':'Entre com sua conta individual.');
  }).catch(error=>cloudLock('Falha ao verificar sua sessão: '+error.message));
  document.addEventListener('visibilitychange',()=>{if(!document.hidden&&cloudValid()){cloud.auth.getUser().then(({data})=>data?.user?cloudActivate(data.user):cloudLock());}});
 }
